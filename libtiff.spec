@@ -8,8 +8,9 @@ Version:	3.5.4
 Release:	2
 License:	distributable
 Group:		Libraries
+Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source:		ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}.tar.gz
+Source0:	ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}.tar.gz
 Patch0:		tiff-glibc.patch
 Patch1:		tiff-shlib.patch
 Patch2:		libtiff-arm.patch
@@ -21,7 +22,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 This package is a library of functions that manipulate TIFF images.
 
 %description -l de
-Eine Library von Funktionen zur Manipulation von TIFFs. 
+Eine Library von Funktionen zur Manipulation von TIFFs.
 
 %description -l fr
 Bibliothèque de fonctions pour manipuler des images TIFF."
@@ -30,13 +31,15 @@ Bibliothèque de fonctions pour manipuler des images TIFF."
 Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ formatem TIFF.
 
 %description -l tr
-Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir kitaplýktýr.
+Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir
+kitaplýktýr.
 
 %package devel
 Summary:	header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff 
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
@@ -45,8 +48,8 @@ This package is all you need to develop programs that manipulate tiff
 images.
 
 %description -l de devel
-Dieses Paket enthält alles, was Sie zum Entwickeln von Programmen
-zum Bearbeiten von tiff-Bildern benötigen.
+Dieses Paket enthält alles, was Sie zum Entwickeln von Programmen zum
+Bearbeiten von tiff-Bildern benötigen.
 
 %description -l fr devel
 Ce package contient tout le nécessaire pour réaliser des programmes
@@ -85,6 +88,7 @@ Kilka prostych programów do manipulowania na plikach tiff.
 Summary:	Static version libtiff library
 Summary(pl):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
+Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
