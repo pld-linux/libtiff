@@ -9,13 +9,13 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.6.0
-Release:	0.beta.1
+Release:	0.beta2.1
 License:	distributable
 Group:		Libraries
-Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}-beta.tar.gz
-# Source0-md5: ce1bd641470e180adf65156d672248f3
-Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.3.tar.gz
-# Source1-md5: 941c9e382752a550e60fd8a75f75c8a8
+Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}-beta2.tar.gz
+# Source0-md5:	647ba1a4c9a22ace5611d82de14cae10
+Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.4.tar.gz
+# Source1-md5:	8e548335de1cf38898722943cc21e27b
 URL:		http://www.libtiff.org/
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
@@ -98,12 +98,12 @@ Static libtiff library.
 Statyczna biblioteka libtiff.
 
 %prep
-%setup  -q -n tiff-v%{version}-beta
+%setup  -q -n tiff-v%{version}-beta2
 
 %if 0%{!?_without_lzw:1}
 tar xzf %{SOURCE1}
-cp -f libtiff-lzw-compression-kit-1.3/*.c libtiff
-cp -f libtiff-lzw-compression-kit-1.3/README-LZW-COMPRESSION .
+cp -f libtiff-lzw-compression-kit-1.4/*.c libtiff
+cp -f libtiff-lzw-compression-kit-1.4/README-LZW-COMPRESSION .
 %endif
 
 %build
