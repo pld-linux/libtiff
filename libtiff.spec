@@ -137,7 +137,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644, root,  man) /usr/man/man1/*
 
 %files static
-/usr/lib/lib*.a
+%attr(644, root, root) /usr/lib/lib*.a
 
 %changelog
 * Sat Aug  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
@@ -162,12 +162,9 @@ rm -rf $RPM_BUILD_ROOT
 - build against glibc-2.1
 
 * Thu May 07 1998 Prospector System <bugs@redhat.com>
-
 - translations modified for de, fr, tr
 
-
 * Mon Oct 13 1997 Donnie Barnes <djb@redhat.com>
-
 - new version to replace the one from libgr
 - patched for glibc
 - added shlib support
