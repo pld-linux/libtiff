@@ -104,7 +104,7 @@ GCOPTS=" " \
 ./configure %{_target} << EOF
 no
 $RPM_BUILD_ROOT/usr/bin
-$RPM_BUILD_ROOT/usr/lib
+$RPM_BUILD_ROOT%{_libdir}
 $RPM_BUILD_ROOT/usr/include
 $RPM_BUILD_ROOT%{_mandir}
 bsd-source-cat
@@ -117,9 +117,9 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/{lib,include,bin,man/man1}
 
 make install
-install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT/usr/lib
+install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
-ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT/usr/lib/libtiff.so
+ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	COPYRIGHT README TODO
@@ -132,12 +132,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/lib/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc {COPYRIGHT,README,TODO}.gz html/*
-/usr/lib/lib*.so
+%{_libdir}/lib*.so
 /usr/include/*
 %{_mandir}/man3/*
 
@@ -148,7 +148,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files static
 %defattr(644,root,root,755)
-/usr/lib/lib*.a
+%{_libdir}/lib*.a
 
 %changelog
 * Sat Apr 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
