@@ -149,10 +149,3 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
-
-%changelog
-* Mon May 24 1999 Artur Frysiak <wiget@pld.org.pl>
-  [3.4-10]
-- based on RH spec
-- rewrite to PLD style (by PLD team)
-- pl translation by Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
