@@ -33,7 +33,7 @@ Eine Library von Funktionen zur Manipulation von TIFFs.
 Bibliothèque de fonctions pour manipuler des images TIFF.
 
 %description -l pl
-Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ plikami w
+Ten pakiet zawiera bibliotekê pozalaj±c± manipulowaæ plikami w
 formacie TIFF.
 
 %description -l tr
