@@ -5,7 +5,7 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.4
-Release:	9
+Release:	10
 Copyright:	distributable
 Group:		Libraries
 Group(pl):	Biblioteki
@@ -114,7 +114,7 @@ make OPTIMIZER="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/usr/{lib,include,bin,man/man1}
+install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
 make install
 install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
@@ -151,41 +151,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/lib*.a
 
 %changelog
-* Sat Apr 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [3.4-8]
-- recompiles on new rpm.
-
-* Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
-  [3.4-7]
-- added Group(pl)
-- added gzipping documentation and man pages
-- minor changes
-
-* Sat Aug  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [3.4-6]
-- modified pl translation,
-- added -q %setup parameter and added using %%{version} in -n,
-- added using $RPM_OPT_FLAGS during compile,
-- added static an progs subpackages,
-- Buildroot changed to /tmp/%%{name}-%%{version}-root,
-- removed VERSION from devel %doc,
-- changed Requires to "Requires: %%{name}-%%{version}",
-- added stripping shared libs,
-- removed using LIBVER macro.
-
-* Thu Jul 16 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-  [3.4-5]
-- added pl translation,
-- added %defattr mafros in %files (for build from not root's account),
-- changed permision of *.so library to 755.
-
-* Tue Jun 30 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
-- build against glibc-2.1
-
-* Thu May 07 1998 Prospector System <bugs@redhat.com>
-- translations modified for de, fr, tr
-
-* Mon Oct 13 1997 Donnie Barnes <djb@redhat.com>
-- new version to replace the one from libgr
-- patched for glibc
-- added shlib support
+* Mon May 24 1999 Artur Frysiak <wiget@pld.org.pl>
+  [3.4-10]
+- based on RH spec
+- rewrite to PLD style (by PLD team)
+- pl translation by Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
