@@ -246,7 +246,7 @@ From Debian - changelog entry:
 +	char	*cp = NULL;
 +	tsize_t	bytes = nmemb * elem_size;
 +
-+	if (elem_size && bytes / elem_size == nmemb)
++	if (nmemb && elem_size && bytes / elem_size == nmemb)
 +		cp = (char*)_TIFFmalloc(bytes);
 +
  	if (cp == NULL)
@@ -599,7 +599,7 @@ From Debian - changelog entry:
 +	char	*cp = NULL;
 +	tsize_t	bytes = nmemb * elem_size;
 +
-+	if (elem_size && bytes / elem_size == nmemb)
++	if (nmemb && elem_size && bytes / elem_size == nmemb)
 +		cp = (char*) _TIFFmalloc(bytes);
 +
 +	if (cp == NULL)
