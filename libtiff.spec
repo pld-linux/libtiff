@@ -1,19 +1,18 @@
 #
 # Conditional build:
-# _without_lzw - without LZW compression (patented in some countries)
-#
+%bcond_without	lzw	# without LZW compression (patented in some countries)
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.6.0
+Version:	3.6.1
 Release:	0.1
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
-# Source0-md5:	ec0ca41f0e5c7cb4aa605fab9ddbaef9
+# Source0-md5:	b3f0ee7617593c2703755672fb1bfed3
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.4.tar.gz
 # Source1-md5:	8e548335de1cf38898722943cc21e27b
 URL:		http://www.libtiff.org/
@@ -101,7 +100,7 @@ Statyczna biblioteka libtiff.
 %prep
 %setup -q -n tiff-v%{version}
 
-%if 0%{!?_without_lzw:1}
+%if %{?with_lzw}
 tar xzf %{SOURCE1}
 cp -f libtiff-lzw-compression-kit-1.4/*.c libtiff
 cp -f libtiff-lzw-compression-kit-1.4/README-LZW-COMPRESSION .
