@@ -1,23 +1,29 @@
+#
+# _without_lzw - without LZW compression (patented in some countries)
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF 
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.5.4
-Release:	2
+%define		ver	3.5.6
+Version:	%{ver}beta
+Release:	1
 License:	distributable
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
-Source0:	ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}.tar.gz
-Patch0:		tiff-glibc.patch
-Patch1:		tiff-shlib.patch
-Patch2:		%{name}-arm.patch
-Patch3:		tiff-config.patch
-URL:		http://www-mipl.jpl.nasa.gov/~ndr/tiff/
+Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{ver}-beta.tar.gz
+Source1:	ftp://ftp.remotesensing.org/pub/libtiff/libtiff-lzw-compression-kit-1.2.tar.gz
+Patch0:		tiff-shlib.patch
+Patch1:		%{name}-arm.patch
+Patch2:		tiff-config.patch
+Patch3:		%{name}-libmess.patch
+URL:		http://www.libtiff.org/
+BuildRequires:	zlib-devel
+BuildRequires:	libjpeg-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -27,10 +33,10 @@ This package is a library of functions that manipulate TIFF images.
 Eine Library von Funktionen zur Manipulation von TIFFs.
 
 %description -l fr
-Bibliothèque de fonctions pour manipuler des images TIFF."
+Bibliothèque de fonctions pour manipuler des images TIFF.
 
 %description -l pl
-Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ formatem TIFF.
+Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ plikami w formacie TIFF.
 
 %description -l tr
 Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir
@@ -104,27 +110,31 @@ Static libtiff library.
 Statyczna bibliteka libtiff.
 
 %prep
-%setup  -q -n tiff-v%{version}
+%setup  -q -n tiff-v%{ver}-beta
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 
+%if %{?_without_lzw:0}%{!?_without_lzw:1}
+tar xzf %{SOURCE1}
+cp -f libtiff-lzw-compression-kit/*.c libtiff
+cp -f libtiff-lzw-compression-kit/README-LZW-COMPRESSION .
+libtiff-lzw-compression-kit/mangle-src.sh `pwd`
+%endif
+
 %build
-./configure %{_target_platform} << EOF
-no
-$RPM_BUILD_ROOT%{_bindir}
-$RPM_BUILD_ROOT%{_libdir}
-$RPM_BUILD_ROOT%{_includedir}
-$RPM_BUILD_ROOT%{_mandir}
-$RPM_BUILD_ROOT/fake
-bsd-source-cat
-yes
-EOF
-cd libtiff
-ln -sf libtiff.so.3.5 libtiff.so
-cd ..
-%{__make} COPTS="%{rpmcflags}" LDOPTS="%{rpmldflags}"
+./configure %{_target_platform} \
+	--with-ZIP --with-DIR_GZLIB=/usr/lib \
+	--with-JPEG --with-DIR_JPEGLIB=/usr/lib \
+	--noninteractive \
+	--prefix=$RPM_BUILD_ROOT%{_prefix} \
+	--with-DIR_MAN=$RPM_BUILD_ROOT%{_mandir} \
+	--with-DIR_HTML=$RPM_BUILD_ROOT/fake \
+	--with-MANSCHEME=bsd-source-cat
+	
+(cd libtiff ; ln -sf libtiff.so.3.5.6 libtiff.so)
+%{__make} COPTS="%{rpmcflags}" LDOPTS="%{rpmldflags}" OPTIMIZER=""
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -133,9 +143,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 %{__make} install
 install libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
-ln -sf libtiff.so.3.5 $RPM_BUILD_ROOT%{_libdir}/libtiff.so
+ln -sf libtiff.so.3.5.6 $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
-gzip -9nf COPYRIGHT README TODO
+gzip -9nf COPYRIGHT README* TODO
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -145,11 +155,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%doc {COPYRIGHT,README*,TODO}.gz
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc {COPYRIGHT,README,TODO}.gz html/*
+%doc html/*
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 %{_mandir}/man3/*
