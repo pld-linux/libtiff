@@ -126,7 +126,7 @@ install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
 ln -sf libtiff.so.3.5 $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
-strip RPM_BUILD_ROOT%{_bindir}/*
+strip $RPM_BUILD_ROOT%{_bindir}/*
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	COPYRIGHT README TODO
