@@ -119,13 +119,13 @@ EOF
 cd libtiff
 ln -s libtiff.so.3.5 libtiff.so
 cd ..
-make COPTS="$RPM_OPT_FLAGS" LDOPTS="-s"
+%{__make} COPTS="$RPM_OPT_FLAGS" LDOPTS="-s"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
-make install
+%{__make} install
 install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
 ln -sf libtiff.so.3.5 $RPM_BUILD_ROOT%{_libdir}/libtiff.so
