@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	lzw	# without LZW compression (patented in some countries)
+#
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
@@ -13,8 +14,8 @@ License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
 # Source0-md5:	b3f0ee7617593c2703755672fb1bfed3
-Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.4.tar.gz
-# Source1-md5:	8e548335de1cf38898722943cc21e27b
+Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.5.tar.gz
+# Source1-md5:	2cd1c94d237d47104106de3bf4f08baa
 URL:		http://www.libtiff.org/
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
@@ -100,10 +101,10 @@ Statyczna biblioteka libtiff.
 %prep
 %setup -q -n tiff-v%{version}
 
-%if %{?with_lzw}
+%if %{with lzw}
 tar xzf %{SOURCE1}
-cp -f libtiff-lzw-compression-kit-1.4/*.c libtiff
-cp -f libtiff-lzw-compression-kit-1.4/README-LZW-COMPRESSION .
+cp -f libtiff-lzw-compression-kit-1.5/*.c libtiff
+cp -f libtiff-lzw-compression-kit-1.5/README-LZW-COMPRESSION .
 %endif
 
 %build
