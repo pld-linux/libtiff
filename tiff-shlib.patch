@@ -1,25 +1,25 @@
---- tiff-v3.4/libtiff/Makefile.in.ewt	Tue Oct 14 21:16:40 1997
-+++ tiff-v3.4/libtiff/Makefile.in	Tue Oct 14 21:51:36 1997
+--- tiff-v3.5.4/libtiff/Makefile.in.pius	Sun Nov 28 21:15:36 1999
++++ tiff-v3.5.4/libtiff/Makefile.in	Thu Jan 20 23:07:24 2000
 @@ -64,6 +64,8 @@
  COPTS	= @GCOPTS@
  OPTIMIZER=-O
  CFLAGS	= @ENVOPTS@ @LIBCOPTS@ ${COPTS} ${OPTIMIZER} ${IPATH} ${CONF_LIBRARY}
-+SONAME = libtiff.so.3
-+SHLIB = libtiff.so.3.4
++SONAME  = libtiff.so.3
++SHLIB   = libtiff.so.3.5
  #
  SRCS	= \
  	tif_aux.c \
-@@ -133,7 +135,8 @@
+@@ -135,7 +137,8 @@
  	tif_write.o \
  	tif_zip.o \
  	${NULL}
 -TARGETS	= libtiff.a
 +TARGETS	= libtiff.a $(SHLIB)
-+SHOBJS= $(OBJS:%.o=%.so) 
++SHOBJS  = $(OBJS:%.o=%.so)
  
  all:	${TARGETS}
  	if [ @DSO@dso != nodso ]; then \
-@@ -146,6 +149,9 @@
+@@ -148,6 +151,9 @@
  	${AR} ${AROPTS} libtiff.a $?
  	${RANLIB} libtiff.a
  
@@ -29,21 +29,25 @@
  #
  # NB: The configure script verifies that the configured
  # tools are capable of producing a DSO before enabling
-@@ -328,3 +334,6 @@
+@@ -346,3 +352,6 @@
  	    mkg3states tif_fax3sm.c \
  	    mkversion version.h \
  	    libtiff.a libtiff.@DSOSUF@ libtiff.@DSOSUF_VERSION@ *dso
 +
 +%.so : %.c
 +	$(CC) -c -fPIC $(CFLAGS) $(CPPFLAGS) $< -o $@
---- tiff-v3.4/tools/Makefile.in.ewt	Tue Oct 14 21:55:37 1997
-+++ tiff-v3.4/tools/Makefile.in	Tue Oct 14 21:56:06 1997
-@@ -47,7 +47,7 @@
+--- tiff-v3.5.4/tools/Makefile.in.pius	Tue Dec 21 00:46:11 1999
++++ tiff-v3.5.4/tools/Makefile.in	Thu Jan 20 23:08:14 2000
+@@ -47,10 +47,10 @@
  IPATH	= -I. -I${SRCDIR} -I${LIBDIR}
  CFLAGS	= @ENVOPTS@ ${COPTS} ${OPTIMIZER} ${IPATH}
  #
--LIBTIFF	= ${DEPTH}/libtiff/libtiff.@DSOSUF@
-+LIBTIFF	= ${DEPTH}/libtiff/libtiff.so.3.4
+-TIFFLIB	= ${DEPTH}/libtiff/libtiff.@DSOSUF@
++TIFFLIB	= ${DEPTH}/libtiff/libtiff.so.3.5
  LIBJPEG	= @LIBJPEG@
  LIBGZ	= @LIBGZ@
- LIBS	= ${LIBTIFF} ${LIBJPEG} ${LIBGZ} @LIBPORT@ @MACHDEPLIBS@
+-LIBTIFF	= @TIFFLIBREF@
++LIBTIFF	= -L${DEPTH}/libtiff  -ltiff
+ LIBPORT	= @LIBPORT@
+ MACHLIBS= @MACHDEPLIBS@
+ LIBS	= ${LIBTIFF} ${LIBJPEG} ${LIBGZ} ${LIBPORT} ${MACHLIBS}

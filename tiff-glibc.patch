@@ -1,11 +1,11 @@
---- tiff-v3.4/configure.djb	Mon Oct 13 18:11:56 1997
-+++ tiff-v3.4/configure	Mon Oct 13 18:13:42 1997
-@@ -1127,7 +1127,7 @@
- 	DSO=SOLARIS
+--- tiff-v3.5.4/configure.pius	Wed Sep  8 14:32:18 1999
++++ tiff-v3.5.4/configure	Thu Jan 20 21:57:05 2000
+@@ -1156,7 +1156,7 @@
+ 	TIFFLIBREF='-L${DEPTH}/libtiff -ltiff'
  	;;
-     *-linux)
--	if [ -x /lib/libc.so.5 ]; then
-+	if [ -x /lib/libc.so.5 -o -x /lib/libc.so.6 ]; then
+     *-linux*)
+-	if [ -r /lib/libc.so.5 ]; then
++	if [ -r /lib/libc.so.5 -o -r /lib/libc.so.6 ]; then
  	    DSOSUF=so.${DIST_MAJOR}
  	    DSOSUF_VERSION=${DSOSUF}.${DIST_MINOR}.${DIST_ALPHA}
  	    LIBCOPTS='-fPIC'
