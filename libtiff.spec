@@ -1,27 +1,26 @@
-#
-# Conditional build:
-%bcond_without	lzw	# without LZW compression (patented in some countries)
-#
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.6.1
+Version:	3.7.0
 Release:	1
-License:	distributable
+License:	BSD-like
 Group:		Libraries
-Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
-# Source0-md5:	b3f0ee7617593c2703755672fb1bfed3
-Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.5.tar.gz
-# Source1-md5:	2cd1c94d237d47104106de3bf4f08baa
-Patch0:		%{name}-amd64.patch
+Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
+# Source0-md5:	305af467c94d988c17ca6528d8936f27
 URL:		http://www.libtiff.org/
-BuildRequires:	libjpeg-devel
-BuildRequires:	zlib-devel
+BuildRequires:	OpenGL-devel
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
+BuildRequires:	glut-devel
+BuildRequires:	libjpeg-devel
+BuildRequires:	libtool
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 This package is a library of functions that manipulate TIFF images.
@@ -45,7 +44,7 @@ Summary:	Header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package is all you need to develop programs that manipulate tiff
@@ -67,13 +66,25 @@ operuj±cych na formacie tiff.
 tiff resimlerini iþleyen programlar yazmak için gerekli dosyalar bu
 pakette yer alýr.
 
+%package static
+Summary:	Static version libtiff library
+Summary(pl):	Biblioteka statyczna libtiff
+Group:		Development/Libraries
+Requires:	%{name}-devel = %{version}-%{release}
+
+%description static
+Static libtiff library.
+
+%description static -l pl
+Statyczna biblioteka libtiff.
+
 %package progs
 Summary:	Simple clients for manipulating tiff images
 Summary(de):	Einfachen Clients zur Manipulation von tiff
 Summary(fr):	Clients simples pour manipuler de telles images
 Summary(pl):	Kilka prostych programów do manipulowania na plikach tiff
 Group:		Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description progs
 Simple clients for manipulating tiff images.
@@ -87,56 +98,40 @@ Clients simples pour manipuler de telles images.
 %description progs -l pl
 Kilka prostych programów do manipulowania na plikach tiff.
 
-%package static
-Summary:	Static version libtiff library
-Summary(pl):	Biblioteka statyczna libtiff
-Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+%package progs-gl
+Summary:	tiffgt - OpenGL-based tiff viewer
+Summary(pl):	tiffgt - program do ogl±dania plików tiff oparty o OpenGL
+Group:		Applications/Graphics
+Requires:	%{name} = %{version}-%{release}
 
-%description static
-Static libtiff library.
+%description progs-gl
+tiffgt - OpenGL-based tiff viewer.
 
-%description static -l pl
-Statyczna biblioteka libtiff.
+%description progs-gl -l pl
+tiffgt - program do ogl±dania plików tiff oparty o OpenGL.
 
 %prep
-%setup -q -n tiff-v%{version}
-%patch0 -p1
-
-%if %{with lzw}
-tar xzf %{SOURCE1}
-cp -f libtiff-lzw-compression-kit-1.5/*.c libtiff
-cp -f libtiff-lzw-compression-kit-1.5/README-LZW-COMPRESSION .
-%endif
+%setup -q -n tiff-%{version}
 
 %build
-cp /usr/share/automake/config.sub .
-./configure %{_target_platform} \
-	--with-ZIP \
-	--with-JPEG \
-	--with-DIR_JPEGLIB=%{_libdir} \
-	--with-DIR_LIBGZ=%{_libdir} \
-	--noninteractive \
-	--prefix=$RPM_BUILD_ROOT%{_prefix} \
-	--with-DIR_MAN=$RPM_BUILD_ROOT%{_mandir} \
-	--with-DIR_HTML=$RPM_BUILD_ROOT/fake \
-	--with-MANSCHEME=bsd-source-cat
+# AC_PROG_LIBTOOL and ltmain.sh version mismatch - regenerate
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__autoheader}
+%{__automake}
+%configure
 
-%{__make} -C libtiff OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
-%{__make} -C tools OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
-%{__make} install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
-if [ "%{_prefix}/lib" != "%{_libdir}" ] ; then
-	mv $RPM_BUILD_ROOT%{_prefix}/lib/* \
-		$RPM_BUILD_ROOT%{_libdir}
-fi
-
-rm -rf html/{*/CVS,Makefile*}
+rm -rf html{,/*}/Makefile*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -146,21 +141,29 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYRIGHT README* TODO
+%doc COPYRIGHT ChangeLog README TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc html/*
 %attr(755,root,root) %{_libdir}/lib*.so
+%{_libdir}/lib*.la
 %{_includedir}/*
 %{_mandir}/man3/*
-
-%files progs
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*
 
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
+
+%files progs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/*
+%exclude %{_bindir}/tiffgt
+%{_mandir}/man1/*
+%exclude %{_mandir}/man1/tiffgt.1*
+
+%files progs-gl
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/tiffgt
+%{_mandir}/man1/tiffgt.1*
