@@ -5,13 +5,14 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.4
-Release:	8
+Release:	9
 Copyright:	distributable
 Group:		Libraries
 Group(pl):	Biblioteki
 Source:		ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
 Patch0:		tiff-glibc.patch
 Patch1:		tiff-shlib.patch
+Patch2:		libtiff-arm.patch
 URL:		http://www-mipl.jpl.nasa.gov/~ndr/tiff/
 Buildroot:	/tmp/%{name}-%{version}-root
 
@@ -96,6 +97,7 @@ Statyczna bibliteka libtiff.
 %setup -q -n tiff-v%{version}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 GCOPTS=" " \
