@@ -19,6 +19,7 @@ Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.4
 URL:		http://www.libtiff.org/
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
+BuildRequires:	automake >= 1.7.9-2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -107,9 +108,12 @@ cp -f libtiff-lzw-compression-kit-1.4/README-LZW-COMPRESSION .
 %endif
 
 %build
+cp /usr/share/automake/config.sub .
 ./configure %{_target_platform} \
 	--with-ZIP \
 	--with-JPEG \
+	--with-DIR_JPEGLIB=%{_libdir} \
+	--with-DIR_LIBGZ=%{_libdir} \
 	--noninteractive \
 	--prefix=$RPM_BUILD_ROOT%{_prefix} \
 	--with-DIR_MAN=$RPM_BUILD_ROOT%{_mandir} \
@@ -124,6 +128,11 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
 %{__make} install
+
+if [ "%{_prefix}/lib" != "%{_libdir}" ] ; then
+	mv $RPM_BUILD_ROOT%{_prefix}/lib/* \
+		$RPM_BUILD_ROOT%{_libdir}
+fi
 
 rm -rf html/{*/CVS,Makefile*}
 
