@@ -106,7 +106,7 @@ no
 $RPM_BUILD_ROOT/usr/bin
 $RPM_BUILD_ROOT/usr/lib
 $RPM_BUILD_ROOT/usr/include
-$RPM_BUILD_ROOT/usr/man
+$RPM_BUILD_ROOT%{_mandir}
 bsd-source-cat
 yes
 EOF
@@ -121,7 +121,7 @@ install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT/usr/lib
 
 ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT/usr/lib/libtiff.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	COPYRIGHT README TODO
 
 %post   -p /sbin/ldconfig
@@ -139,12 +139,12 @@ rm -rf $RPM_BUILD_ROOT
 %doc {COPYRIGHT,README,TODO}.gz html/*
 /usr/lib/lib*.so
 /usr/include/*
-/usr/man/man3/*
+%{_mandir}/man3/*
 
 %files progs
 %defattr(644,root,root,755)
 %attr(755,root,root) /usr/bin/*
-/usr/man/man1/*
+%{_mandir}/man1/*
 
 %files static
 %defattr(644,root,root,755)
