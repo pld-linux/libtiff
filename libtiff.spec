@@ -7,11 +7,11 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.5.7
-Release:	1
+Release:	2
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
-Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.2.tar.gz
+Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.3.tar.gz
 Patch0:		tiff-shlib.patch
 Patch1:		%{name}-arm.patch
 Patch2:		tiff-config.patch
@@ -96,7 +96,7 @@ Requires:	%{name}-devel = %{version}
 Static libtiff library.
 
 %description static -l pl
-Statyczna bibliteka libtiff.
+Statyczna biblioteka libtiff.
 
 %prep
 %setup  -q -n tiff-v%{version}
@@ -107,9 +107,8 @@ Statyczna bibliteka libtiff.
 
 %if %{?_without_lzw:0}%{!?_without_lzw:1}
 tar xzf %{SOURCE1}
-cp -f libtiff-lzw-compression-kit/*.c libtiff
-cp -f libtiff-lzw-compression-kit/README-LZW-COMPRESSION .
-libtiff-lzw-compression-kit/mangle-src.sh `pwd`
+cp -f libtiff-lzw-compression-kit-1.3/*.c libtiff
+cp -f libtiff-lzw-compression-kit-1.3/README-LZW-COMPRESSION .
 %endif
 
 %build
