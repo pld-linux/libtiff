@@ -1,25 +1,22 @@
 #
+# Conditional build:
 # _without_lzw - without LZW compression (patented in some countries)
+#
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.5.7
-Release:	2
+Version:	3.6.0
+Release:	0.beta.1
 License:	distributable
 Group:		Libraries
-Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
+Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}-beta.tar.gz
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.3.tar.gz
-Patch0:		tiff-shlib.patch
-Patch1:		%{name}-arm.patch
-Patch2:		tiff-config.patch
-Patch3:		%{name}-libmess.patch
 URL:		http://www.libtiff.org/
-BuildRequires:	zlib-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	automake
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -99,20 +96,15 @@ Static libtiff library.
 Statyczna biblioteka libtiff.
 
 %prep
-%setup  -q -n tiff-v%{version}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
+%setup  -q -n tiff-v%{version}-beta
 
-%if %{?_without_lzw:0}%{!?_without_lzw:1}
+%if 0%{!?_without_lzw:1}
 tar xzf %{SOURCE1}
 cp -f libtiff-lzw-compression-kit-1.3/*.c libtiff
 cp -f libtiff-lzw-compression-kit-1.3/README-LZW-COMPRESSION .
 %endif
 
 %build
-install /usr/share/automake/config.* .
 ./configure %{_target_platform} \
 	--with-ZIP \
 	--with-JPEG \
@@ -122,7 +114,6 @@ install /usr/share/automake/config.* .
 	--with-DIR_HTML=$RPM_BUILD_ROOT/fake \
 	--with-MANSCHEME=bsd-source-cat
 
-(cd libtiff ; ln -sf libtiff.so.%{version} libtiff.so)
 %{__make} -C libtiff OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
 %{__make} -C tools OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
 
@@ -131,15 +122,14 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
 %{__make} install
-install libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
-ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libtiff.so
-
-%post   -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+rm -rf html/{*/CVS,Makefile*}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post   -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
