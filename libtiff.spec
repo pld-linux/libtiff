@@ -103,7 +103,7 @@ Statyczna bibliteka libtiff.
 GCOPTS=" " \
 ./configure %{_target} << EOF
 no
-$RPM_BUILD_ROOT/usr/bin
+$RPM_BUILD_ROOT%{_bindir}
 $RPM_BUILD_ROOT%{_libdir}
 $RPM_BUILD_ROOT/usr/include
 $RPM_BUILD_ROOT%{_mandir}
@@ -143,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) /usr/bin/*
+%attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 
 %files static
