@@ -106,7 +106,7 @@ $RPM_BUILD_ROOT/usr/man
 bsd-source-cat
 yes
 EOF
-make OPTIMIZER=$RPM_OPT_FLAGS
+make OPTIMIZER="$RPM_OPT_FLAGS"
 
 %install
 rm -rf $RPM_BUILD_ROOT
