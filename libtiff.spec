@@ -105,7 +105,7 @@ GCOPTS=" " \
 no
 $RPM_BUILD_ROOT%{_bindir}
 $RPM_BUILD_ROOT%{_libdir}
-$RPM_BUILD_ROOT/usr/include
+$RPM_BUILD_ROOT%{_includedir}
 $RPM_BUILD_ROOT%{_mandir}
 bsd-source-cat
 yes
@@ -138,7 +138,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc {COPYRIGHT,README,TODO}.gz html/*
 %{_libdir}/lib*.so
-/usr/include/*
+%{_includedir}/*
 %{_mandir}/man3/*
 
 %files progs
