@@ -9,14 +9,14 @@ Name:		libtiff
 %define		ver	3.5.6
 Version:	%{ver}beta
 Release:	1
-License:	distributable
+License:	Distributable
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{ver}-beta.tar.gz
-Source1:	ftp://ftp.remotesensing.org/pub/libtiff/libtiff-lzw-compression-kit-1.2.tar.gz
+Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.2.tar.gz
 Patch0:		tiff-shlib.patch
 Patch1:		%{name}-arm.patch
 Patch2:		tiff-config.patch
@@ -36,7 +36,8 @@ Eine Library von Funktionen zur Manipulation von TIFFs.
 Bibliothèque de fonctions pour manipuler des images TIFF.
 
 %description -l pl
-Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ plikami w formacie TIFF.
+Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ plikami w
+formacie TIFF.
 
 %description -l tr
 Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir
@@ -125,8 +126,8 @@ libtiff-lzw-compression-kit/mangle-src.sh `pwd`
 
 %build
 ./configure %{_target_platform} \
-	--with-ZIP --with-DIR_GZLIB=/usr/lib \
-	--with-JPEG --with-DIR_JPEGLIB=/usr/lib \
+	--with-ZIP \
+	--with-JPEG \
 	--noninteractive \
 	--prefix=$RPM_BUILD_ROOT%{_prefix} \
 	--with-DIR_MAN=$RPM_BUILD_ROOT%{_mandir} \
