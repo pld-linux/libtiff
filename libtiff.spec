@@ -31,7 +31,7 @@ Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ formatem TIFF.
 %description -l tr
 Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir kitaplýktýr.
 
-%package devel
+%package	devel
 Summary:	header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen  unter Verwendung von libtiff 
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
@@ -59,7 +59,7 @@ manipulant des images au format tiff.
 tiff resimlerini iþleyen programlar yazmak için gerekli dosyalar bu pakette
 yer alýr.
 
-%package progs
+%package	progs
 Summary:	Simple clients for manipulating tiff images
 Summary(de):	Einfachen Clients zur Manipulation von tiff
 Summary(fr):	Clients simples pour manipuler de telles images
@@ -80,7 +80,7 @@ Clients simples pour manipuler de telles images.
 %description progs -l pl
 Kilka prostych programów do manipulowania na plikach tiff.
 
-%package static
+%package	static
 Summary:	Static version libtiff library
 Summary(pl):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
@@ -94,7 +94,7 @@ Static libtiff library.
 Statyczna bibliteka libtiff.
 
 %prep
-%setup -q -n tiff-v%{version}
+%setup  -q -n tiff-v%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -132,12 +132,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/lib*.so.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc {COPYRIGHT,README,TODO}.gz html/*
-%{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 %{_mandir}/man3/*
 
