@@ -1,19 +1,19 @@
-Summary:     Library for handling TIFF files.
-Summary(de): Library zum Verwalten von TIFF-Dateien
-Summary(fr): Bibliothèque de gestion des fichiers TIFF
-Summary(pl): Bibliteka do manipulacji plikami w formacie TIFF 
-Summary(tr): TIFF dosyalarýný iþleme kitaplýðý
-Name:        libtiff
-Version:     3.4
-Release:     7
-Copyright:   distributable
-Group:       Libraries
-Group(pl):   Biblioteki
-URL:         http://www-mipl.jpl.nasa.gov/~ndr/tiff/
-Source:      ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
-Patch0:      tiff-glibc.patch
-Patch1:      tiff-shlib.patch
-Buildroot:   /tmp/%{name}-%{version}-root
+Summary:	Library for handling TIFF files.
+Summary(de):	Library zum Verwalten von TIFF-Dateien
+Summary(fr):	Bibliothèque de gestion des fichiers TIFF
+Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF 
+Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
+Name:		libtiff
+Version:	3.4
+Release:	7
+Copyright:	distributable
+Group:		Libraries
+Group(pl):	Biblioteki
+Source:		ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
+Patch0:		tiff-glibc.patch
+Patch1:		tiff-shlib.patch
+URL:		http://www-mipl.jpl.nasa.gov/~ndr/tiff/
+Buildroot:	/tmp/%{name}-%{version}-root
 
 %description
 This package is a library of functions that manipulate TIFF images.
@@ -31,12 +31,12 @@ Ten pakiet zawiera bibliotekê pozalaj±ce manipulowaæ formatem TIFF.
 Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir kitaplýktýr.
 
 %package devel
-Summary:     header files for developing programs using libtiff
-Summary(de): Header zur Entwicklung von Programmen  unter Verwendung von libtiff 
-Summary(pl): Pliki nag³ówkowe do biblioteki libtiff
-Group:       Development/Libraries
-Group(pl):   Programowanie/Biblioteki
-Requires:    %{name} = %{version}
+Summary:	header files for developing programs using libtiff
+Summary(de):	Header zur Entwicklung von Programmen  unter Verwendung von libtiff 
+Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description devel
 This package is all you need to develop programs that manipulate tiff
@@ -59,13 +59,13 @@ tiff resimlerini iþleyen programlar yazmak için gerekli dosyalar bu pakette
 yer alýr.
 
 %package progs
-Summary:     Simple clients for manipulating tiff images
-Summary(de): Einfachen Clients zur Manipulation von tiff
-Summary(fr): Clients simples pour manipuler de telles images
-Summary(pl): Kilka prostych programów do manipulowania na plikach tiff
-Group:       Development/Libraries
-Group(pl):   Programowanie/Biblioteki
-Requires:    %{name} = %{version}
+Summary:	Simple clients for manipulating tiff images
+Summary(de):	Einfachen Clients zur Manipulation von tiff
+Summary(fr):	Clients simples pour manipuler de telles images
+Summary(pl):	Kilka prostych programów do manipulowania na plikach tiff
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name} = %{version}
 
 %description progs
 Simple clients for manipulating tiff images.
@@ -80,11 +80,11 @@ Clients simples pour manipuler de telles images.
 Kilka prostych programów do manipulowania na plikach tiff.
 
 %package static
-Summary:     Static version libtiff library
-Summary(pl): Biblioteka statyczna libtiff
-Group:       Development/Libraries
-Group(pl):   Programowanie/Biblioteki
-Requires:    %{name}-devel = %{version}
+Summary:	Static version libtiff library
+Summary(pl):	Biblioteka statyczna libtiff
+Group:		Development/Libraries
+Group(pl):	Programowanie/Biblioteki
+Requires:	%{name}-devel = %{version}
 
 %description static
 Static libtiff library.
