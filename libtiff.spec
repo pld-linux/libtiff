@@ -20,6 +20,7 @@ Patch3:		%{name}-libmess.patch
 URL:		http://www.libtiff.org/
 BuildRequires:	zlib-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -113,6 +114,7 @@ libtiff-lzw-compression-kit/mangle-src.sh `pwd`
 %endif
 
 %build
+install /usr/share/automake/config.* .
 ./configure %{_target_platform} \
 	--with-ZIP \
 	--with-JPEG \
