@@ -10,7 +10,7 @@ Copyright:   distributable
 Group:       Libraries
 Group(pl):   Biblioteki
 URL:         http://www-mipl.jpl.nasa.gov/~ndr/tiff/
-Source:     ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
+Source:      ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
 Patch0:      tiff-glibc.patch
 Patch1:      tiff-shlib.patch
 Buildroot:   /tmp/%{name}-%{version}-root
@@ -119,8 +119,8 @@ install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT/usr/lib
 
 ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT/usr/lib/libtiff.so
 
-gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/*
-gzip -9nf COPYRIGHT README TODO html/*.html
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
+	COPYRIGHT README TODO html/*.html
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -129,6 +129,7 @@ gzip -9nf COPYRIGHT README TODO html/*.html
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(644,root,root,755)
 %attr(755,root,root) /usr/lib/lib*.so.*.*
 
 %files devel
@@ -144,7 +145,8 @@ rm -rf $RPM_BUILD_ROOT
 /usr/man/man1/*
 
 %files static
-%attr(644,root,root) /usr/lib/lib*.a
+%defattr(644,root,root,755)
+/usr/lib/lib*.a
 
 %changelog
 * Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
