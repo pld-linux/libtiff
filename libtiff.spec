@@ -13,7 +13,6 @@ Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 Patch0:		%{name}-cxx.patch
 Patch1:		%{name}-alpha.patch
 URL:		http://www.remotesensing.org/libtiff/
-BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	glut-devel
