@@ -15,7 +15,7 @@ Patch1:		tiff-shlib.patch
 Patch2:		libtiff-arm.patch
 Patch3:		tiff-config.patch
 URL:		http://www-mipl.jpl.nasa.gov/~ndr/tiff/
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 This package is a library of functions that manipulate TIFF images.
