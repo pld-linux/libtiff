@@ -5,7 +5,7 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.4
-Release:	7
+Release:	8
 Copyright:	distributable
 Group:		Libraries
 Group(pl):	Biblioteki
@@ -120,7 +120,7 @@ install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT/usr/lib
 ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT/usr/lib/libtiff.so
 
 gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/* \
-	COPYRIGHT README TODO html/*.html
+	COPYRIGHT README TODO
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -149,6 +149,10 @@ rm -rf $RPM_BUILD_ROOT
 /usr/lib/lib*.a
 
 %changelog
+* Sat Apr 24 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [3.4-8]
+- recompiles on new rpm.
+
 * Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
   [3.4-7]
 - added Group(pl)
