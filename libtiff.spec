@@ -11,7 +11,9 @@ Release:	1
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
+# Source0-md5:	82243b5ae9b7c9e492aeebc501680990
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.2.tar.gz
+# Source1-md5:	bb8d85b3f29b78edf8a06a7831b4df31
 Patch0:		tiff-shlib.patch
 Patch1:		%{name}-arm.patch
 Patch2:		tiff-config.patch
