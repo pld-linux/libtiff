@@ -11,13 +11,6 @@ Version:	%{ver}beta
 Release:	1
 License:	distributable
 Group:		Libraries
-Group(de):	Libraries
-Group(es):	Bibliotecas
-Group(fr):	Librairies
-Group(pl):	Biblioteki
-Group(pt_BR):	Bibliotecas
-Group(ru):	Библиотеки
-Group(uk):	Б╕бл╕отеки
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{ver}-beta.tar.gz
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.2.tar.gz
 Patch0:		tiff-shlib.patch
@@ -51,13 +44,6 @@ Summary:	header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff 
 Summary(pl):	Pliki nagЁСwkowe do biblioteki libtiff
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description devel
@@ -86,8 +72,6 @@ Summary(de):	Einfachen Clients zur Manipulation von tiff
 Summary(fr):	Clients simples pour manipuler de telles images
 Summary(pl):	Kilka prostych programСw do manipulowania na plikach tiff
 Group:		Applications/Graphics
-Group(de):	Applikationen/Grafik
-Group(pl):	Aplikacje/Grafika
 Requires:	%{name} = %{version}
 
 %description progs
@@ -106,13 +90,6 @@ Kilka prostych programСw do manipulowania na plikach tiff.
 Summary:	Static version libtiff library
 Summary(pl):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Разработка/Библиотеки
-Group(uk):	Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 
 %description static
