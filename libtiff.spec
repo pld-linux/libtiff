@@ -13,6 +13,7 @@ Source:		ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}.tar.gz
 Patch0:		tiff-glibc.patch
 Patch1:		tiff-shlib.patch
 Patch2:		libtiff-arm.patch
+Patch3:		tiff-config.patch
 URL:		http://www-mipl.jpl.nasa.gov/~ndr/tiff/
 BuildRoot:	/tmp/%{name}-%{version}-root
 
@@ -98,9 +99,9 @@ Statyczna bibliteka libtiff.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
-GCOPTS=" " \
 ./configure %{_target_platform} << EOF
 no
 $RPM_BUILD_ROOT%{_bindir}
