@@ -101,7 +101,7 @@ Statyczna bibliteka libtiff.
 
 %build
 GCOPTS=" " \
-./configure %{_target} << EOF
+./configure %{_target_platform} << EOF
 no
 $RPM_BUILD_ROOT%{_bindir}
 $RPM_BUILD_ROOT%{_libdir}
