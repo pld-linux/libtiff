@@ -149,7 +149,7 @@ rm -rf $RPM_BUILD_ROOT
 - Buildroot changed to /tmp/%%{name}-%%{version}-root,
 - removed VERSION from devel %doc,
 - changed Requires to "Requires: %%{name}-%%{version}",
-- added striping shared libs,
+- added stripping shared libs,
 - removed using LIBVER macro.
 
 * Thu Jul 16 1998 Wojtek ¦lusarczyk <wojtek@shadow.eu.org>
