@@ -63,8 +63,8 @@ Summary:	Simple clients for manipulating tiff images
 Summary(de):	Einfachen Clients zur Manipulation von tiff
 Summary(fr):	Clients simples pour manipuler de telles images
 Summary(pl):	Kilka prostych programów do manipulowania na plikach tiff
-Group:		Development/Libraries
-Group(pl):	Programowanie/Biblioteki
+Group:		Applications/Graphics
+Group(pl):	Aplikacje/Grafika
 Requires:	%{name} = %{version}
 
 %description progs
