@@ -1,5 +1,8 @@
 #
 # _without_lzw - without LZW compression (was patented in some countries)
+#
+# WARNING: don't enable OJPEG_SUPPORT here, it would (likely) open CAN-2004-0929
+#
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
