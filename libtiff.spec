@@ -9,13 +9,14 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.6.1
-Release:	0.1
+Release:	1
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
 # Source0-md5:	b3f0ee7617593c2703755672fb1bfed3
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.5.tar.gz
 # Source1-md5:	2cd1c94d237d47104106de3bf4f08baa
+Patch0:		%{name}-amd64.patch
 URL:		http://www.libtiff.org/
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
@@ -100,6 +101,7 @@ Statyczna biblioteka libtiff.
 
 %prep
 %setup -q -n tiff-v%{version}
+%patch0 -p1
 
 %if %{with lzw}
 tar xzf %{SOURCE1}
