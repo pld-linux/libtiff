@@ -6,12 +6,11 @@ Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-%define		ver	3.5.6
-Version:	%{ver}beta
+Version:	3.5.7
 Release:	1
 License:	distributable
 Group:		Libraries
-Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{ver}-beta.tar.gz
+Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.2.tar.gz
 Patch0:		tiff-shlib.patch
 Patch1:		%{name}-arm.patch
@@ -100,7 +99,7 @@ Static libtiff library.
 Statyczna bibliteka libtiff.
 
 %prep
-%setup  -q -n tiff-v%{ver}-beta
+%setup  -q -n tiff-v%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -124,8 +123,9 @@ install /usr/share/automake/config.* .
 	--with-DIR_HTML=$RPM_BUILD_ROOT/fake \
 	--with-MANSCHEME=bsd-source-cat
 
-(cd libtiff ; ln -sf libtiff.so.3.5.6 libtiff.so)
-%{__make} COPTS="%{rpmcflags}" LDOPTS="%{rpmldflags}" OPTIMIZER=""
+(cd libtiff ; ln -sf libtiff.so.%{version} libtiff.so)
+%{__make} -C libtiff OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
+%{__make} -C tools OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -134,7 +134,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 %{__make} install
 install libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
-ln -sf libtiff.so.3.5.6 $RPM_BUILD_ROOT%{_libdir}/libtiff.so
+ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
 gzip -9nf COPYRIGHT README* TODO
 
