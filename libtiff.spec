@@ -13,7 +13,9 @@ Release:	0.beta.1
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}-beta.tar.gz
+# Source0-md5: ce1bd641470e180adf65156d672248f3
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.3.tar.gz
+# Source1-md5: 941c9e382752a550e60fd8a75f75c8a8
 URL:		http://www.libtiff.org/
 BuildRequires:	libjpeg-devel
 BuildRequires:	zlib-devel
