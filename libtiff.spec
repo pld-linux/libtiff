@@ -1,5 +1,5 @@
 #
-# _without_lzw - without LZW compression (patented in some countries)
+# _without_lzw - without LZW compression (was patented in some countries)
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
@@ -7,7 +7,7 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.5.7
-Release:	1
+Release:	2
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
@@ -15,13 +15,12 @@ Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
 Source1:	ftp://ftp.remotesensing.org/pub/libtiff/%{name}-lzw-compression-kit-1.2.tar.gz
 # Source1-md5:	bb8d85b3f29b78edf8a06a7831b4df31
 Patch0:		tiff-shlib.patch
-Patch1:		%{name}-arm.patch
-Patch2:		tiff-config.patch
-Patch3:		%{name}-libmess.patch
+Patch1:		%{name}-libmess.patch
+Patch2:		%{name}-security.patch
 URL:		http://www.libtiff.org/
-BuildRequires:	zlib-devel
-BuildRequires:	libjpeg-devel
 BuildRequires:	automake
+BuildRequires:	libjpeg-devel
+BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -46,7 +45,7 @@ Summary:	header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 This package is all you need to develop programs that manipulate tiff
@@ -74,7 +73,7 @@ Summary(de):	Einfachen Clients zur Manipulation von tiff
 Summary(fr):	Clients simples pour manipuler de telles images
 Summary(pl):	Kilka prostych programów do manipulowania na plikach tiff
 Group:		Applications/Graphics
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description progs
 Simple clients for manipulating tiff images.
@@ -92,20 +91,19 @@ Kilka prostych programów do manipulowania na plikach tiff.
 Summary:	Static version libtiff library
 Summary(pl):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libtiff library.
 
 %description static -l pl
-Statyczna bibliteka libtiff.
+Statyczna biblioteka libtiff.
 
 %prep
-%setup  -q -n tiff-v%{version}
+%setup -q -n tiff-v%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 %if %{?_without_lzw:0}%{!?_without_lzw:1}
 tar xzf %{SOURCE1}
@@ -125,9 +123,15 @@ install /usr/share/automake/config.* .
 	--with-DIR_HTML=$RPM_BUILD_ROOT/fake \
 	--with-MANSCHEME=bsd-source-cat
 
-(cd libtiff ; ln -sf libtiff.so.%{version} libtiff.so)
-%{__make} -C libtiff OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
-%{__make} -C tools OPTIMIZER="%{rpmcflags}" CC=%{__cc} COPTS=""
+ln -sf libtiff.so.%{version} libtiff/libtiff.so
+%{__make} -C libtiff \
+	OPTIMIZER="%{rpmcflags}" \
+	CC="%{__cc}" \
+	COPTS=""
+%{__make} -C tools \
+	OPTIMIZER="%{rpmcflags}" \
+	CC="%{__cc}" \
+	COPTS=""
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -138,17 +142,15 @@ install libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
 ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
-gzip -9nf COPYRIGHT README* TODO
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files
 %defattr(644,root,root,755)
-%doc {COPYRIGHT,README*,TODO}.gz
+%doc COPYRIGHT README* TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
