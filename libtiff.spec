@@ -10,12 +10,14 @@ License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	37d222df12eb23691614cd40b7b1f215
+Patch0:		%{name}-cxx.patch
 URL:		http://www.remotesensing.org/libtiff/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	glut-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -45,6 +47,8 @@ Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	libjpeg-devel
+Requires:	zlib-devel
 
 %description devel
 This package is all you need to develop programs that manipulate tiff
@@ -77,6 +81,44 @@ Static libtiff library.
 
 %description static -l pl
 Statyczna biblioteka libtiff.
+
+%package cxx
+Summary:	libtiff C++ streams library
+Summary(pl):	Biblioteka strumieni C++ dla libtiff
+Group:		Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description cxx
+libtiff C++ streams library.
+
+%description cxx -l pl
+Biblioteka strumieni C++ dla libtiff.
+
+%package cxx-devel
+Summary:	libtiff C++ streams API
+Summary(pl):	API strumieni C++ dla libtiff
+Group:		Development/Libraries
+Requires:	%{name}-cxx = %{version}-%{release}
+Requires:	%{name}-devel = %{version}-%{release}
+Requires:	libstdc++-devel
+
+%description cxx-devel
+libtiff C++ streams API.
+
+%description cxx-devel -l pl
+API strumieni C++ dla libtiff.
+
+%package cxx-static
+Summary:	libtiff C++ streams static library
+Summary(pl):	Statyczna biblioteka strumieni C++ dla libtiff
+Group:		Development/Libraries
+Requires:	%{name}-cxx-devel = %{version}-%{release}
+
+%description cxx-static
+libtiff C++ streams static library.
+
+%description cxx-static -l pl
+Statyczna biblioteka strumieni C++ dla libtiff.
 
 %package progs
 Summary:	Simple clients for manipulating tiff images
@@ -112,9 +154,9 @@ tiffgt - program do ogl±dania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
+%patch0 -p1
 
 %build
-# AC_PROG_LIBTOOL and ltmain.sh version mismatch - regenerate
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
@@ -131,7 +173,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf html{,/*}/Makefile*
+rm -rf html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -142,19 +184,33 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc COPYRIGHT ChangeLog README TODO
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libtiff.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
 %doc html/*
-%attr(755,root,root) %{_libdir}/lib*.so
-%{_libdir}/lib*.la
-%{_includedir}/*
+%attr(755,root,root) %{_libdir}/libtiff.so
+%{_libdir}/libtiff.la
+%{_includedir}/tiff*.h
 %{_mandir}/man3/*
 
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libtiff.a
+
+%files cxx
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libtiffcxx.so.*.*.*
+
+%files cxx-devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libtiffcxx.so
+%{_libdir}/libtiffcxx.la
+%{_includedir}/tiffio.hxx
+
+%files cxx-static
+%defattr(644,root,root,755)
+%{_libdir}/libtiffcxx.a
 
 %files progs
 %defattr(644,root,root,755)
