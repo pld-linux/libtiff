@@ -4,12 +4,12 @@ Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.7.0
+Version:	3.7.1
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	305af467c94d988c17ca6528d8936f27
+# Source0-md5:	37d222df12eb23691614cd40b7b1f215
 URL:		http://www.libtiff.org/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.59
