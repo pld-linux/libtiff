@@ -107,6 +107,7 @@ $RPM_BUILD_ROOT%{_bindir}
 $RPM_BUILD_ROOT%{_libdir}
 $RPM_BUILD_ROOT%{_includedir}
 $RPM_BUILD_ROOT%{_mandir}
+$RPM_BUILD_ROOT/fake
 bsd-source-cat
 yes
 EOF
