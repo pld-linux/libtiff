@@ -9,7 +9,7 @@ Name:		libtiff
 %define		ver	3.5.6
 Version:	%{ver}beta
 Release:	1
-License:	Distributable
+License:	distributable
 Group:		Libraries
 Group(de):	Libraries
 Group(es):	Bibliotecas
