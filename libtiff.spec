@@ -11,8 +11,8 @@ Group:       Libraries
 Group(pl):   Biblioteki
 URL:         http://www-mipl.jpl.nasa.gov/~ndr/tiff/
 Source:     ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
-Patch0:      tiff-v3.4-glibc.patch
-Patch1:      tiff-v3.4-shlib.patch
+Patch0:      tiff-glibc.patch
+Patch1:      tiff-shlib.patch
 Buildroot:   /tmp/%{name}-%{version}-root
 
 %description
