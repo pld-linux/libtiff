@@ -7,7 +7,7 @@ Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.5.7
-Release:	2
+Release:	2.1
 License:	distributable
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-v%{version}.tar.gz
