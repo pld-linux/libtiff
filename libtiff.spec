@@ -5,11 +5,12 @@ Summary(pl): Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr): TIFF dosyalarýný iþleme kitaplýðý
 Name:        libtiff
 Version:     3.4
-Release:     6
+Release:     7
 Copyright:   distributable
 Group:       Libraries
+Group(pl):   Biblioteki
 URL:         http://www-mipl.jpl.nasa.gov/~ndr/tiff/
-Source0:     ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
+Source:     ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}-tar.gz
 Patch0:      tiff-v3.4-glibc.patch
 Patch1:      tiff-v3.4-shlib.patch
 Buildroot:   /tmp/%{name}-%{version}-root
@@ -34,6 +35,7 @@ Summary:     header files for developing programs using libtiff
 Summary(de): Header zur Entwicklung von Programmen  unter Verwendung von libtiff 
 Summary(pl): Pliki nag³ówkowe do biblioteki libtiff
 Group:       Development/Libraries
+Group(pl):   Programowanie/Biblioteki
 Requires:    %{name} = %{version}
 
 %description devel
@@ -62,6 +64,7 @@ Summary(de): Einfachen Clients zur Manipulation von tiff
 Summary(fr): Clients simples pour manipuler de telles images
 Summary(pl): Kilka prostych programów do manipulowania na plikach tiff
 Group:       Development/Libraries
+Group(pl):   Programowanie/Biblioteki
 Requires:    %{name} = %{version}
 
 %description progs
@@ -80,6 +83,7 @@ Kilka prostych programów do manipulowania na plikach tiff.
 Summary:     Static version libtiff library
 Summary(pl): Biblioteka statyczna libtiff
 Group:       Development/Libraries
+Group(pl):   Programowanie/Biblioteki
 Requires:    %{name}-devel = %{version}
 
 %description static
@@ -87,8 +91,6 @@ Static libtiff library.
 
 %description static -l pl
 Statyczna bibliteka libtiff.
-
-
 
 %prep
 %setup -q -n tiff-v%{version}
@@ -111,10 +113,14 @@ make OPTIMIZER="$RPM_OPT_FLAGS"
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/usr/{lib,include,bin,man/man1}
+
 make install
 install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT/usr/lib
 
 ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT/usr/lib/libtiff.so
+
+gzip -9nf $RPM_BUILD_ROOT/usr/man/man*/*
+gzip -9nf COPYRIGHT README TODO html/*.html
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -123,23 +129,30 @@ ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT/usr/lib/libtiff.so
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%attr(755, root, root) /usr/lib/lib*.so.*.*
+%attr(755,root,root) /usr/lib/lib*.so.*.*
 
 %files devel
-%defattr(644, root, root, 755)
-%doc COPYRIGHT README TODO html/*
+%defattr(644,root,root,755)
+%doc {COPYRIGHT,README,TODO}.gz html/*
 /usr/lib/lib*.so
 /usr/include/*
-%attr(644, root, man) /usr/man/man3/*
+/usr/man/man3/*
 
 %files progs
-%attr(755, root, root) /usr/bin/*
-%attr(644, root,  man) /usr/man/man1/*
+%defattr(644,root,root,755)
+%attr(755,root,root) /usr/bin/*
+/usr/man/man1/*
 
 %files static
-%attr(644, root, root) /usr/lib/lib*.a
+%attr(644,root,root) /usr/lib/lib*.a
 
 %changelog
+* Sun Mar 14 1999 Micha³ Kuratczyk <kura@pld.org.pl>
+  [3.4-7]
+- added Group(pl)
+- added gzipping documentation and man pages
+- minor changes
+
 * Sat Aug  8 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [3.4-6]
 - modified pl translation,
