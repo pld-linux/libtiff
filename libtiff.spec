@@ -135,8 +135,6 @@ install libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
 ln -sf libtiff.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
-gzip -9nf COPYRIGHT README* TODO
-
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -145,7 +143,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {COPYRIGHT,README*,TODO}.gz
+%doc COPYRIGHT README* TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
