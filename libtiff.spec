@@ -4,14 +4,12 @@ Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.7.1
-Release:	4
+Version:	3.7.2
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	37d222df12eb23691614cd40b7b1f215
-Patch0:		%{name}-cxx.patch
-Patch1:		%{name}-alpha.patch
+# Source0-md5:	9d7123bd0dbde2a3853fb758346adb78
 URL:		http://www.remotesensing.org/libtiff/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -154,8 +152,6 @@ tiffgt - program do ogl±dania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
-%patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -201,17 +197,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files cxx
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libtiffcxx.so.*.*.*
+%attr(755,root,root) %{_libdir}/libtiffxx.so.*.*.*
 
 %files cxx-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libtiffcxx.so
-%{_libdir}/libtiffcxx.la
+%attr(755,root,root) %{_libdir}/libtiffxx.so
+%{_libdir}/libtiffxx.la
 %{_includedir}/tiffio.hxx
 
 %files cxx-static
 %defattr(644,root,root,755)
-%{_libdir}/libtiffcxx.a
+%{_libdir}/libtiffxx.a
 
 %files progs
 %defattr(644,root,root,755)
