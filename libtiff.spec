@@ -1,11 +1,11 @@
-Summary:	Library for handling TIFF files.
+Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF 
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 Version:	3.5.4
-Release:	1
+Release:	2
 License:	distributable
 Group:		Libraries
 Group(pl):	Biblioteki
@@ -44,10 +44,6 @@ Requires:	%{name} = %{version}
 This package is all you need to develop programs that manipulate tiff
 images.
 
-%description -l pl devel
-Pakiet ten zawiera wszystko co potrzebujesz przy pisaniu programów
-operuj±cych na formacie tiff.
-
 %description -l de devel
 Dieses Paket enthält alles, was Sie zum Entwickeln von Programmen
 zum Bearbeiten von tiff-Bildern benötigen.
@@ -55,6 +51,10 @@ zum Bearbeiten von tiff-Bildern benötigen.
 %description -l fr devel
 Ce package contient tout le nécessaire pour réaliser des programmes
 manipulant des images au format tiff.
+
+%description -l pl devel
+Pakiet ten zawiera wszystko co potrzebujesz przy pisaniu programów
+operuj±cych na formacie tiff.
 
 %description -l tr devel
 tiff resimlerini iþleyen programlar yazmak için gerekli dosyalar bu
