@@ -101,7 +101,7 @@ Statyczna bibliteka libtiff.
 
 %build
 GCOPTS=" " \
-./configure --target=linux << EOF
+./configure %{_target} << EOF
 no
 $RPM_BUILD_ROOT/usr/bin
 $RPM_BUILD_ROOT/usr/lib
