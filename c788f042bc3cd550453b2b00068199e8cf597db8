@@ -1,0 +1,3 @@
+- patch libtiff-alpha.patch for fix work with one alpha channel by Jan Kanty
+  Palus <atler@o2.pl>
+- release 3
