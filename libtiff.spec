@@ -39,7 +39,7 @@ Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir
 kitaplýktýr.
 
 %package devel
-Summary:	header files for developing programs using libtiff
+Summary:	Header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
