@@ -10,7 +10,7 @@ License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	37d222df12eb23691614cd40b7b1f215
-URL:		http://www.libtiff.org/
+URL:		http://www.remotesensing.org/libtiff/
 BuildRequires:	OpenGL-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
