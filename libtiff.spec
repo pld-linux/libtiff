@@ -3,7 +3,7 @@
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
-Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF 
+Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
 %define		ver	3.5.6
@@ -41,7 +41,7 @@ kitaplýktýr.
 
 %package devel
 Summary:	header files for developing programs using libtiff
-Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff 
+Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}
@@ -50,19 +50,19 @@ Requires:	%{name} = %{version}
 This package is all you need to develop programs that manipulate tiff
 images.
 
-%description -l de devel
+%description devel -l de
 Dieses Paket enthält alles, was Sie zum Entwickeln von Programmen zum
 Bearbeiten von tiff-Bildern benötigen.
 
-%description -l fr devel
+%description devel -l fr
 Ce package contient tout le nécessaire pour réaliser des programmes
 manipulant des images au format tiff.
 
-%description -l pl devel
+%description devel -l pl
 Pakiet ten zawiera wszystko co potrzebujesz przy pisaniu programów
 operuj±cych na formacie tiff.
 
-%description -l tr devel
+%description devel -l tr
 tiff resimlerini iþleyen programlar yazmak için gerekli dosyalar bu
 pakette yer alýr.
 
@@ -121,7 +121,7 @@ libtiff-lzw-compression-kit/mangle-src.sh `pwd`
 	--with-DIR_MAN=$RPM_BUILD_ROOT%{_mandir} \
 	--with-DIR_HTML=$RPM_BUILD_ROOT/fake \
 	--with-MANSCHEME=bsd-source-cat
-	
+
 (cd libtiff ; ln -sf libtiff.so.3.5.6 libtiff.so)
 %{__make} COPTS="%{rpmcflags}" LDOPTS="%{rpmldflags}" OPTIMIZER=""
 
