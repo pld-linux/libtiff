@@ -8,12 +8,14 @@ Version:	3.5.4
 Release:	2
 License:	distributable
 Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
 Group(fr):	Librairies
 Group(pl):	Biblioteki
 Source0:	ftp://ftp.sgi.com/graphics/tiff/tiff-v%{version}.tar.gz
 Patch0:		tiff-glibc.patch
 Patch1:		tiff-shlib.patch
-Patch2:		libtiff-arm.patch
+Patch2:		%{name}-arm.patch
 Patch3:		tiff-config.patch
 URL:		http://www-mipl.jpl.nasa.gov/~ndr/tiff/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -39,6 +41,7 @@ Summary:	header files for developing programs using libtiff
 Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff 
 Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name} = %{version}
@@ -69,6 +72,7 @@ Summary(de):	Einfachen Clients zur Manipulation von tiff
 Summary(fr):	Clients simples pour manipuler de telles images
 Summary(pl):	Kilka prostych programów do manipulowania na plikach tiff
 Group:		Applications/Graphics
+Group(de):	Applikationen/Grafik
 Group(pl):	Aplikacje/Grafika
 Requires:	%{name} = %{version}
 
@@ -88,6 +92,7 @@ Kilka prostych programów do manipulowania na plikach tiff.
 Summary:	Static version libtiff library
 Summary(pl):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
@@ -117,23 +122,20 @@ bsd-source-cat
 yes
 EOF
 cd libtiff
-ln -s libtiff.so.3.5 libtiff.so
+ln -sf libtiff.so.3.5 libtiff.so
 cd ..
-%{__make} COPTS="$RPM_OPT_FLAGS" LDOPTS="-s"
+%{__make} COPTS="%{rpmcflags}" LDOPTS="%{rpmldflags}"
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
 %{__make} install
-install -s libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
+install libtiff/lib*.so.*.* $RPM_BUILD_ROOT%{_libdir}
 
 ln -sf libtiff.so.3.5 $RPM_BUILD_ROOT%{_libdir}/libtiff.so
 
-strip $RPM_BUILD_ROOT%{_bindir}/*
-
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	COPYRIGHT README TODO
+gzip -9nf COPYRIGHT README TODO
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
