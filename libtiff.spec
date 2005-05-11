@@ -1,5 +1,3 @@
-# TODO
-# - security http://www.gentoo.org/security/en/glsa/glsa-200505-07.xml
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
