@@ -4,12 +4,12 @@ Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
 Name:		libtiff
-Version:	3.7.3
+Version:	3.7.4
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	8a4511793f4b20b91ddee0e53bc08dea
+# Source0-md5:	f37a7907bca4e235da85eb0126caa2b0
 URL:		http://www.remotesensing.org/libtiff/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -153,9 +153,11 @@ tiffgt - program do ogl±dania plików tiff oparty o OpenGL.
 %prep
 %setup -q -n tiff-%{version}
 
+rm -f m4/libtool.m4
+
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
