@@ -11,9 +11,9 @@ Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	edd4a2036f6f315d26170178f0f8641e
 URL:		http://www.remotesensing.org/libtiff/
+BuildRequires:	OpenGL-glut-devel
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
-BuildRequires:	glut-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
