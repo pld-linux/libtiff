@@ -4,12 +4,12 @@ Summary(fr):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
 Summary(tr):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.8.1
+Version:	3.8.2
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	edd4a2036f6f315d26170178f0f8641e
+# Source0-md5:	fbb6f446ea4ed18955e2714934e5b698
 URL:		http://www.remotesensing.org/libtiff/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
