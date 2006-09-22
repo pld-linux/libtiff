@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_without opengl # do not build OpenGL viewer
+#
 Summary:	Library for handling TIFF files
 Summary(de):	Library zum Verwalten von TIFF-Dateien
 Summary(fr):	Bibliothèque de gestion des fichiers TIFF
@@ -12,7 +16,7 @@ Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	fbb6f446ea4ed18955e2714934e5b698
 Patch0:		%{name}-sec.patch
 URL:		http://www.remotesensing.org/libtiff/
-BuildRequires:	OpenGL-glut-devel
+%{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	libjpeg-devel
@@ -217,11 +221,15 @@ rm -rf $RPM_BUILD_ROOT
 %files progs
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%exclude %{_bindir}/tiffgt
 %{_mandir}/man1/*
+%if %{with opengl}
 %exclude %{_mandir}/man1/tiffgt.1*
+%exclude %{_bindir}/tiffgt
+%endif
 
+%if %{with opengl}
 %files progs-gl
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/tiffgt
 %{_mandir}/man1/tiffgt.1*
+%endif
