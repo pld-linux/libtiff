@@ -3,10 +3,10 @@
 %bcond_without opengl # do not build OpenGL viewer
 #
 Summary:	Library for handling TIFF files
-Summary(de):	Library zum Verwalten von TIFF-Dateien
-Summary(fr):	Bibliothèque de gestion des fichiers TIFF
-Summary(pl):	Bibliteka do manipulacji plikami w formacie TIFF
-Summary(tr):	TIFF dosyalarýný iþleme kitaplýðý
+Summary(de.UTF-8):   Library zum Verwalten von TIFF-Dateien
+Summary(fr.UTF-8):   BibliothÃ¨que de gestion des fichiers TIFF
+Summary(pl.UTF-8):   Bibliteka do manipulacji plikami w formacie TIFF
+Summary(tr.UTF-8):   TIFF dosyalarÄ±nÄ± iÅŸleme kitaplÄ±ÄŸÄ±
 Name:		libtiff
 Version:	3.8.2
 Release:	4
@@ -30,24 +30,24 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 This package is a library of functions that manipulate TIFF images.
 
-%description -l de
+%description -l de.UTF-8
 Eine Library von Funktionen zur Manipulation von TIFFs.
 
-%description -l fr
-Bibliothèque de fonctions pour manipuler des images TIFF.
+%description -l fr.UTF-8
+BibliothÃ¨que de fonctions pour manipuler des images TIFF.
 
-%description -l pl
-Ten pakiet zawiera bibliotekê pozwalaj±c± manipulowaæ plikami w
+%description -l pl.UTF-8
+Ten pakiet zawiera bibliotekÄ™ pozwalajÄ…cÄ… manipulowaÄ‡ plikami w
 formacie TIFF.
 
-%description -l tr
-Bu paket TIFF resimlerini iþleyen fonksiyonlardan oluþan bir
-kitaplýktýr.
+%description -l tr.UTF-8
+Bu paket TIFF resimlerini iÅŸleyen fonksiyonlardan oluÅŸan bir
+kitaplÄ±ktÄ±r.
 
 %package devel
 Summary:	Header files for developing programs using libtiff
-Summary(de):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
-Summary(pl):	Pliki nag³ówkowe do biblioteki libtiff
+Summary(de.UTF-8):   Header zur Entwicklung von Programmen unter Verwendung von libtiff
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libjpeg-devel
@@ -57,49 +57,49 @@ Requires:	zlib-devel
 This package is all you need to develop programs that manipulate tiff
 images.
 
-%description devel -l de
-Dieses Paket enthält alles, was Sie zum Entwickeln von Programmen zum
-Bearbeiten von tiff-Bildern benötigen.
+%description devel -l de.UTF-8
+Dieses Paket enthÃ¤lt alles, was Sie zum Entwickeln von Programmen zum
+Bearbeiten von tiff-Bildern benÃ¶tigen.
 
-%description devel -l fr
-Ce package contient tout le nécessaire pour réaliser des programmes
+%description devel -l fr.UTF-8
+Ce package contient tout le nÃ©cessaire pour rÃ©aliser des programmes
 manipulant des images au format tiff.
 
-%description devel -l pl
-Pakiet ten zawiera wszystko co potrzebujesz przy pisaniu programów
-operuj±cych na formacie tiff.
+%description devel -l pl.UTF-8
+Pakiet ten zawiera wszystko co potrzebujesz przy pisaniu programÃ³w
+operujÄ…cych na formacie tiff.
 
-%description devel -l tr
-tiff resimlerini iþleyen programlar yazmak için gerekli dosyalar bu
-pakette yer alýr.
+%description devel -l tr.UTF-8
+tiff resimlerini iÅŸleyen programlar yazmak iÃ§in gerekli dosyalar bu
+pakette yer alÄ±r.
 
 %package static
 Summary:	Static version libtiff library
-Summary(pl):	Biblioteka statyczna libtiff
+Summary(pl.UTF-8):   Biblioteka statyczna libtiff
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
 %description static
 Static libtiff library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Statyczna biblioteka libtiff.
 
 %package cxx
 Summary:	libtiff C++ streams library
-Summary(pl):	Biblioteka strumieni C++ dla libtiff
+Summary(pl.UTF-8):   Biblioteka strumieni C++ dla libtiff
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description cxx
 libtiff C++ streams library.
 
-%description cxx -l pl
+%description cxx -l pl.UTF-8
 Biblioteka strumieni C++ dla libtiff.
 
 %package cxx-devel
 Summary:	libtiff C++ streams API
-Summary(pl):	API strumieni C++ dla libtiff
+Summary(pl.UTF-8):   API strumieni C++ dla libtiff
 Group:		Development/Libraries
 Requires:	%{name}-cxx = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
@@ -108,52 +108,52 @@ Requires:	libstdc++-devel
 %description cxx-devel
 libtiff C++ streams API.
 
-%description cxx-devel -l pl
+%description cxx-devel -l pl.UTF-8
 API strumieni C++ dla libtiff.
 
 %package cxx-static
 Summary:	libtiff C++ streams static library
-Summary(pl):	Statyczna biblioteka strumieni C++ dla libtiff
+Summary(pl.UTF-8):   Statyczna biblioteka strumieni C++ dla libtiff
 Group:		Development/Libraries
 Requires:	%{name}-cxx-devel = %{version}-%{release}
 
 %description cxx-static
 libtiff C++ streams static library.
 
-%description cxx-static -l pl
+%description cxx-static -l pl.UTF-8
 Statyczna biblioteka strumieni C++ dla libtiff.
 
 %package progs
 Summary:	Simple clients for manipulating tiff images
-Summary(de):	Einfachen Clients zur Manipulation von tiff
-Summary(fr):	Clients simples pour manipuler de telles images
-Summary(pl):	Kilka prostych programów do manipulowania na plikach tiff
+Summary(de.UTF-8):   Einfachen Clients zur Manipulation von tiff
+Summary(fr.UTF-8):   Clients simples pour manipuler de telles images
+Summary(pl.UTF-8):   Kilka prostych programÃ³w do manipulowania na plikach tiff
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
 %description progs
 Simple clients for manipulating tiff images.
 
-%description progs -l de
+%description progs -l de.UTF-8
 Einfachen Clients zur Manipulation von tiff.
 
-%description progs -l fr
+%description progs -l fr.UTF-8
 Clients simples pour manipuler de telles images.
 
-%description progs -l pl
-Kilka prostych programów do manipulowania na plikach tiff.
+%description progs -l pl.UTF-8
+Kilka prostych programÃ³w do manipulowania na plikach tiff.
 
 %package progs-gl
 Summary:	tiffgt - OpenGL-based tiff viewer
-Summary(pl):	tiffgt - program do ogl±dania plików tiff oparty o OpenGL
+Summary(pl.UTF-8):   tiffgt - program do oglÄ…dania plikÃ³w tiff oparty o OpenGL
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
 %description progs-gl
 tiffgt - OpenGL-based tiff viewer.
 
-%description progs-gl -l pl
-tiffgt - program do ogl±dania plików tiff oparty o OpenGL.
+%description progs-gl -l pl.UTF-8
+tiffgt - program do oglÄ…dania plikÃ³w tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
