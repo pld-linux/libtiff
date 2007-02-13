@@ -3,10 +3,10 @@
 %bcond_without opengl # do not build OpenGL viewer
 #
 Summary:	Library for handling TIFF files
-Summary(de.UTF-8):   Library zum Verwalten von TIFF-Dateien
-Summary(fr.UTF-8):   Bibliothèque de gestion des fichiers TIFF
-Summary(pl.UTF-8):   Bibliteka do manipulacji plikami w formacie TIFF
-Summary(tr.UTF-8):   TIFF dosyalarını işleme kitaplığı
+Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
+Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
+Summary(pl.UTF-8):	Bibliteka do manipulacji plikami w formacie TIFF
+Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
 Version:	3.8.2
 Release:	4
@@ -46,8 +46,8 @@ kitaplıktır.
 
 %package devel
 Summary:	Header files for developing programs using libtiff
-Summary(de.UTF-8):   Header zur Entwicklung von Programmen unter Verwendung von libtiff
-Summary(pl.UTF-8):   Pliki nagłówkowe do biblioteki libtiff
+Summary(de.UTF-8):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
+Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	libjpeg-devel
@@ -75,7 +75,7 @@ pakette yer alır.
 
 %package static
 Summary:	Static version libtiff library
-Summary(pl.UTF-8):   Biblioteka statyczna libtiff
+Summary(pl.UTF-8):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 
@@ -87,7 +87,7 @@ Statyczna biblioteka libtiff.
 
 %package cxx
 Summary:	libtiff C++ streams library
-Summary(pl.UTF-8):   Biblioteka strumieni C++ dla libtiff
+Summary(pl.UTF-8):	Biblioteka strumieni C++ dla libtiff
 Group:		Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -99,7 +99,7 @@ Biblioteka strumieni C++ dla libtiff.
 
 %package cxx-devel
 Summary:	libtiff C++ streams API
-Summary(pl.UTF-8):   API strumieni C++ dla libtiff
+Summary(pl.UTF-8):	API strumieni C++ dla libtiff
 Group:		Development/Libraries
 Requires:	%{name}-cxx = %{version}-%{release}
 Requires:	%{name}-devel = %{version}-%{release}
@@ -113,7 +113,7 @@ API strumieni C++ dla libtiff.
 
 %package cxx-static
 Summary:	libtiff C++ streams static library
-Summary(pl.UTF-8):   Statyczna biblioteka strumieni C++ dla libtiff
+Summary(pl.UTF-8):	Statyczna biblioteka strumieni C++ dla libtiff
 Group:		Development/Libraries
 Requires:	%{name}-cxx-devel = %{version}-%{release}
 
@@ -125,9 +125,9 @@ Statyczna biblioteka strumieni C++ dla libtiff.
 
 %package progs
 Summary:	Simple clients for manipulating tiff images
-Summary(de.UTF-8):   Einfachen Clients zur Manipulation von tiff
-Summary(fr.UTF-8):   Clients simples pour manipuler de telles images
-Summary(pl.UTF-8):   Kilka prostych programów do manipulowania na plikach tiff
+Summary(de.UTF-8):	Einfachen Clients zur Manipulation von tiff
+Summary(fr.UTF-8):	Clients simples pour manipuler de telles images
+Summary(pl.UTF-8):	Kilka prostych programów do manipulowania na plikach tiff
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
@@ -145,7 +145,7 @@ Kilka prostych programów do manipulowania na plikach tiff.
 
 %package progs-gl
 Summary:	tiffgt - OpenGL-based tiff viewer
-Summary(pl.UTF-8):   tiffgt - program do oglądania plików tiff oparty o OpenGL
+Summary(pl.UTF-8):	tiffgt - program do oglądania plików tiff oparty o OpenGL
 Group:		Applications/Graphics
 Requires:	%{name} = %{version}-%{release}
 
