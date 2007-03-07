@@ -5,7 +5,7 @@
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
 Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
-Summary(pl.UTF-8):	Bibliteka do manipulacji plikami w formacie TIFF
+Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
 Version:	3.8.2
