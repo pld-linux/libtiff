@@ -1,3 +1,4 @@
+# TODO: CVE-2006-2193
 #
 # Conditional build:
 %bcond_without opengl # do not build OpenGL viewer
