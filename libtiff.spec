@@ -17,6 +17,9 @@ Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	fbb6f446ea4ed18955e2714934e5b698
 Patch0:		%{name}-sec.patch
 URL:		http://www.remotesensing.org/libtiff/
+# http://securitytracker.com/alerts/2008/Aug/1020750.html
+# fix from: http://securitytracker.com/alerts/2008/Aug/1020781.html
+BuildRequires:	security(CVE-2008-2327)
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
