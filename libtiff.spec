@@ -1,5 +1,4 @@
-# TODO: CVE-2006-2193
-#	fix opengl bcond
+# TODO: fix opengl bcond
 #
 # Conditional build:
 %bcond_without opengl # do not build OpenGL viewer
@@ -20,6 +19,7 @@ Patch0:		%{name}-sec.patch
 Patch1:		%{name}-lzw-bugs.patch
 Patch2:		%{name}-libtool.patch
 Patch3:		%{name}-glut.patch
+Patch4:		%{name}-CVE-2006-2193.patch
 URL:		http://www.remotesensing.org/libtiff/
 # http://securitytracker.com/alerts/2008/Aug/1020750.html
 # fix from: http://securitytracker.com/alerts/2008/Aug/1020781.html
@@ -170,6 +170,7 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 %patch1 -p1
 %patch2
 %patch3
+%patch4 -p1
 
 rm -f m4/{libtool,lt*}.m4
 
