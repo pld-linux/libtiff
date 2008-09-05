@@ -1,4 +1,3 @@
-# TODO: fix opengl bcond
 #
 # Conditional build:
 %bcond_without opengl # do not build OpenGL viewer
@@ -10,7 +9,7 @@ Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
 Version:	3.8.2
-Release:	5
+Release:	6
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
@@ -29,7 +28,6 @@ BuildRequires:	automake
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
-%{?with_opengl:BuildRequires:	xorg-lib-libXmu-devel}
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -180,7 +178,8 @@ rm -f m4/{libtool,lt*}.m4
 %{__autoconf}
 %{__autoheader}
 %{__automake}
-%configure
+%configure \
+	%{!?with_opengl:--without-x}
 
 %{__make}
 
