@@ -20,6 +20,8 @@ Patch2:		%{name}-libtool.patch
 Patch3:		%{name}-glut.patch
 Patch4:		%{name}-CVE-2006-2193.patch
 URL:		http://www.remotesensing.org/libtiff/
+# http://securitytracker.com/alerts/2009/Jun/1022426.html
+BuildRequires:	security(LZWDecodeCompat_via_underflow)
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
