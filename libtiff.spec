@@ -9,7 +9,7 @@ Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
 Version:	3.8.2
-Release:	6
+Release:	7
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
@@ -19,9 +19,8 @@ Patch1:		%{name}-lzw-bugs.patch
 Patch2:		%{name}-libtool.patch
 Patch3:		%{name}-glut.patch
 Patch4:		%{name}-CVE-2006-2193.patch
+Patch5:		%{name}-CVE-2009-2285.patch
 URL:		http://www.remotesensing.org/libtiff/
-# http://securitytracker.com/alerts/2009/Jun/1022426.html
-BuildRequires:	security(LZWDecodeCompat_via_underflow)
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
@@ -169,6 +168,7 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 %patch2
 %patch3
 %patch4 -p1
+%patch5 -p1
 
 rm -f m4/{libtool,lt*}.m4
 
