@@ -15,8 +15,8 @@ Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	63c59a44f34ae0787f2d71de3d256e20
 Patch0:		%{name}-sec.patch
-Patch3:		%{name}-glut.patch
-Patch5:		%{name}-CVE-2009-2285.patch
+Patch1:		%{name}-glut.patch
+Patch2:		%{name}-CVE-2009-2285.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
@@ -159,9 +159,9 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
-#%patch0 -p1 PARTIAL (assert/fip part needs update, the rest is fixed)
-%patch3
-%patch5 -p1
+%patch0 -p1
+%patch1 -p0
+%patch2 -p1
 
 %{__rm} m4/{libtool,lt*}.m4
 
@@ -204,6 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtiff.la
 %{_includedir}/tiff*.h
 %{_mandir}/man3/TIFF*.3tiff*
+%{_mandir}/man3/libtiff.3tiff*
 
 %files static
 %defattr(644,root,root,755)
