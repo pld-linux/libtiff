@@ -8,22 +8,19 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.8.2
-Release:	7
+Version:	3.9.1
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	fbb6f446ea4ed18955e2714934e5b698
+# Source0-md5:	63c59a44f34ae0787f2d71de3d256e20
 Patch0:		%{name}-sec.patch
-Patch1:		%{name}-lzw-bugs.patch
-Patch2:		%{name}-libtool.patch
-Patch3:		%{name}-glut.patch
-Patch4:		%{name}-CVE-2006-2193.patch
-Patch5:		%{name}-CVE-2009-2285.patch
+Patch1:		%{name}-glut.patch
+Patch2:		%{name}-CVE-2009-2285.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.11
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
@@ -162,15 +159,11 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
-
 %patch0 -p1
-%patch1 -p1
-%patch2
-%patch3
-%patch4 -p1
-%patch5 -p1
+%patch1 -p0
+%patch2 -p1
 
-rm -f m4/{libtool,lt*}.m4
+%{__rm} m4/{libtool,lt*}.m4
 
 %build
 %{__libtoolize}
@@ -202,6 +195,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYRIGHT ChangeLog README TODO
 %attr(755,root,root) %{_libdir}/libtiff.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtiff.so.3
 
 %files devel
 %defattr(644,root,root,755)
@@ -209,7 +203,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libtiff.so
 %{_libdir}/libtiff.la
 %{_includedir}/tiff*.h
-%{_mandir}/man3/*
+%{_mandir}/man3/TIFF*.3tiff*
+%{_mandir}/man3/libtiff.3tiff*
 
 %files static
 %defattr(644,root,root,755)
@@ -218,6 +213,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cxx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libtiffxx.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libtiffxx.so.3
 
 %files cxx-devel
 %defattr(644,root,root,755)
