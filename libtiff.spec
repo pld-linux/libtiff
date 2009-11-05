@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without opengl # do not build OpenGL viewer
+%bcond_without opengl	# do not build OpenGL viewer
 #
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
@@ -8,12 +8,12 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.9.1
+Version:	3.9.2
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	63c59a44f34ae0787f2d71de3d256e20
+# Source0-md5:	93e56e421679c591de7552db13384cb8
 Patch0:		%{name}-sec.patch
 Patch1:		%{name}-glut.patch
 Patch2:		%{name}-CVE-2009-2285.patch
