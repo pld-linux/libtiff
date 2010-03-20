@@ -21,6 +21,7 @@ URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
+BuildRequires:	jbigkit-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
@@ -52,6 +53,7 @@ Summary(de.UTF-8):	Header zur Entwicklung von Programmen unter Verwendung von li
 Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
+Requires:	jbigkit-devel >= 2.0
 Requires:	libjpeg-devel
 Requires:	zlib-devel
 
