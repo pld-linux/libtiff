@@ -8,12 +8,12 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.9.3
+Version:	3.9.4
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	8e9c2ee955ed7d277dca83a972f306be
+# Source0-md5:	2006c1bdd12644dbf02956955175afd6
 Patch0:		%{name}-sec.patch
 Patch1:		%{name}-glut.patch
 Patch2:		%{name}-CVE-2009-2285.patch
