@@ -8,12 +8,12 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.9.2
-Release:	3
+Version:	3.9.3
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	93e56e421679c591de7552db13384cb8
+# Source0-md5:	8e9c2ee955ed7d277dca83a972f306be
 Patch0:		%{name}-sec.patch
 Patch1:		%{name}-glut.patch
 Patch2:		%{name}-CVE-2009-2285.patch
@@ -21,7 +21,7 @@ URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake >= 1:1.11
-BuildRequires:	jbigkit-devel >= 2.0
+BuildRequires:	jbigkit-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool
