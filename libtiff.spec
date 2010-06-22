@@ -53,7 +53,7 @@ Summary(de.UTF-8):	Header zur Entwicklung von Programmen unter Verwendung von li
 Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	jbigkit-devel >= 2.0
+Requires:	jbigkit-devel
 Requires:	libjpeg-devel
 Requires:	zlib-devel
 
