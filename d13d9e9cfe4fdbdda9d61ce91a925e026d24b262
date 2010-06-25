@@ -1,0 +1,2 @@
+- 3.9.3 (fixes CVE-2010-1411, CVE-2010-2065, CVE-2010-2443)
+- it is compatible with lower versions of jbigkit-devel
