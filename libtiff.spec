@@ -19,7 +19,7 @@ Patch1:		%{name}-glut.patch
 Patch2:		%{name}-CVE-2009-2285.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
-BuildRequires:	autoconf >= 2.59
+BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	jbigkit-devel
 BuildRequires:	libjpeg-devel
