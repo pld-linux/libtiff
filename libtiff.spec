@@ -2,21 +2,21 @@
 # Conditional build:
 %bcond_without opengl	# do not build OpenGL viewer
 #
+%define		_beta	beta6
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
 Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.9.4
-Release:	2
+Version:	4.0.0
+Release:	0.%{_beta}.1
 License:	BSD-like
 Group:		Libraries
-Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	2006c1bdd12644dbf02956955175afd6
+Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}%{_beta}.tar.gz
+# Source0-md5:	6a1e51841a5a5062cc381e34a48122a0
 Patch0:		%{name}-sec.patch
 Patch1:		%{name}-glut.patch
-Patch2:		%{name}-CVE-2009-2285.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
@@ -25,6 +25,7 @@ BuildRequires:	jbigkit-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
+BuildRequires:	sed >= 4.0
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -160,10 +161,11 @@ tiffgt - OpenGL-based tiff viewer.
 tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %prep
-%setup -q -n tiff-%{version}
-%patch0 -p1
+%setup -q -n tiff-%{version}%{_beta}
+# TODO: check
+#%%patch0 -p1
 %patch1 -p0
-%patch2 -p1
+%{__sed} -i 's,html,,' Makefile.am
 
 %{__rm} m4/{libtool,lt*}.m4
 
@@ -185,7 +187,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
+%{__rm} -r html{,/*}/Makefile*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -197,7 +199,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYRIGHT ChangeLog README TODO
 %attr(755,root,root) %{_libdir}/libtiff.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtiff.so.3
+%attr(755,root,root) %ghost %{_libdir}/libtiff.so.5
 
 %files devel
 %defattr(644,root,root,755)
@@ -215,7 +217,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cxx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libtiffxx.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtiffxx.so.3
+%attr(755,root,root) %ghost %{_libdir}/libtiffxx.so.5
 
 %files cxx-devel
 %defattr(644,root,root,755)
