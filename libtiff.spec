@@ -8,15 +8,14 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.9.4
-Release:	2
+Version:	3.9.5
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	2006c1bdd12644dbf02956955175afd6
-Patch0:		%{name}-sec.patch
-Patch1:		%{name}-glut.patch
-Patch2:		%{name}-CVE-2009-2285.patch
+# Source0-md5:	8fc7ce3b4e1d0cc8a319336967815084
+Patch0:		%{name}-glut.patch
+Patch1:		%{name}-CVE-2009-2285.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
@@ -161,9 +160,8 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
-%patch0 -p1
-%patch1 -p0
-%patch2 -p1
+%patch0 -p0
+%patch1 -p1
 
 %{__rm} m4/{libtool,lt*}.m4
 
@@ -185,7 +183,7 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-rm -rf html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
+%{__rm} -r html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
