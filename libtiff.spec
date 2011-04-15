@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without opengl	# do not build OpenGL viewer
 #
-%define		_beta	beta6
+%define		_beta	beta7
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
 Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
@@ -14,9 +14,8 @@ Release:	0.%{_beta}.1
 License:	BSD-like
 Group:		Libraries
 Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}%{_beta}.tar.gz
-# Source0-md5:	6a1e51841a5a5062cc381e34a48122a0
-Patch0:		%{name}-sec.patch
-Patch1:		%{name}-glut.patch
+# Source0-md5:	7a8252fbc6287ff2aa9b26062041a33e
+Patch0:		%{name}-glut.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
@@ -162,9 +161,7 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}%{_beta}
-# TODO: check
-#%%patch0 -p1
-%patch1 -p0
+%patch0 -p1
 %{__sed} -i 's,html,,' Makefile.am
 
 %{__rm} m4/{libtool,lt*}.m4
@@ -187,7 +184,9 @@ install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-%{__rm} -r html{,/*}/Makefile*
+%{__rm} -rf html{,/*}/Makefile*
+%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/doc
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/libtiff.la
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -205,10 +204,10 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc html/*
 %attr(755,root,root) %{_libdir}/libtiff.so
-%{_libdir}/libtiff.la
 %{_includedir}/tiff*.h
 %{_mandir}/man3/TIFF*.3tiff*
 %{_mandir}/man3/libtiff.3tiff*
+%{_pkgconfigdir}/libtiff-4.pc
 
 %files static
 %defattr(644,root,root,755)
