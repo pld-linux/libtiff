@@ -12,7 +12,7 @@ Version:	3.9.5
 Release:	2
 License:	BSD-like
 Group:		Libraries
-Source0:	ftp://ftp.remotesensing.org/pub/libtiff/tiff-%{version}.tar.gz
+Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	8fc7ce3b4e1d0cc8a319336967815084
 Patch0:		%{name}-glut.patch
 Patch1:		%{name}-CVE-2009-2285.patch
