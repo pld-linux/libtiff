@@ -1,3 +1,4 @@
+# TODO: libjpeg12 support (separate libjpeg compiled with 12-bits/sample)
 #
 # Conditional build:
 %bcond_without opengl	# do not build OpenGL viewer
@@ -8,15 +9,14 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	3.9.5
-Release:	2
+Version:	4.0.0
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	8fc7ce3b4e1d0cc8a319336967815084
+# Source0-md5:	456ad12e7c492b275a0d047f2ba89904
 Patch0:		%{name}-glut.patch
-Patch1:		%{name}-CVE-2009-2285.patch
-Patch2:		%{name}-sec.patch
+Patch1:		%{name}-sec.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
@@ -25,6 +25,8 @@ BuildRequires:	jbigkit-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
+%{?with_opengl:BuildRequires:	xorg-lib-libX11-devel}
+BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -55,6 +57,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	jbigkit-devel
 Requires:	libjpeg-devel
+Requires:	xz-devel
 Requires:	zlib-devel
 
 %description devel
@@ -161,11 +164,8 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %prep
 %setup -q -n tiff-%{version}
-%patch0 -p0
+%patch0 -p1
 %patch1 -p1
-%patch2 -p1
-
-%{__rm} m4/{libtool,lt*}.m4
 
 %build
 %{__libtoolize}
@@ -180,12 +180,16 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_libdir},%{_includedir},%{_bindir},%{_mandir}/man1}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
 %{__rm} -r html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
+
+# program not packaged
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/sgi2tiff.1
+
+# libtiff.la kept - Libs.private are incomplete (lzma missing)
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -197,7 +201,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc COPYRIGHT ChangeLog README TODO
 %attr(755,root,root) %{_libdir}/libtiff.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtiff.so.3
+%attr(755,root,root) %ghost %{_libdir}/libtiff.so.5
 
 %files devel
 %defattr(644,root,root,755)
@@ -205,6 +209,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libtiff.so
 %{_libdir}/libtiff.la
 %{_includedir}/tiff*.h
+%{_pkgconfigdir}/libtiff-4.pc
 %{_mandir}/man3/TIFF*.3tiff*
 %{_mandir}/man3/libtiff.3tiff*
 
@@ -215,7 +220,7 @@ rm -rf $RPM_BUILD_ROOT
 %files cxx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libtiffxx.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtiffxx.so.3
+%attr(755,root,root) %ghost %{_libdir}/libtiffxx.so.5
 
 %files cxx-devel
 %defattr(644,root,root,755)
@@ -229,12 +234,28 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*
-%if %{with opengl}
-%exclude %{_mandir}/man1/tiffgt.1*
-%exclude %{_bindir}/tiffgt
-%endif
+%attr(755,root,root) %{_bindir}/bmp2tiff
+%attr(755,root,root) %{_bindir}/fax2ps
+%attr(755,root,root) %{_bindir}/fax2tiff
+%attr(755,root,root) %{_bindir}/gif2tiff
+%attr(755,root,root) %{_bindir}/pal2rgb
+%attr(755,root,root) %{_bindir}/ppm2tiff
+%attr(755,root,root) %{_bindir}/ras2tiff
+%attr(755,root,root) %{_bindir}/raw2tiff
+%attr(755,root,root) %{_bindir}/rgb2ycbcr
+%attr(755,root,root) %{_bindir}/thumbnail
+%attr(755,root,root) %{_bindir}/tiff[!g]*
+%{_mandir}/man1/bmp2tiff.1*
+%{_mandir}/man1/fax2ps.1*
+%{_mandir}/man1/fax2tiff.1*
+%{_mandir}/man1/gif2tiff.1*
+%{_mandir}/man1/pal2rgb.1*
+%{_mandir}/man1/ppm2tiff.1*
+%{_mandir}/man1/ras2tiff.1*
+%{_mandir}/man1/raw2tiff.1*
+%{_mandir}/man1/rgb2ycbcr.1*
+%{_mandir}/man1/thumbnail.1*
+%{_mandir}/man1/tiff[!g]*.1*
 
 %if %{with opengl}
 %files progs-gl
