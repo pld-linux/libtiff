@@ -1,7 +1,7 @@
-# TODO: libjpeg12 support (separate libjpeg compiled with 12-bits/sample)
 #
 # Conditional build:
-%bcond_without opengl	# do not build OpenGL viewer
+%bcond_without	opengl	# do not build OpenGL viewer
+%bcond_with	jpeg12	# dual 8/12-bit libjpeg mode
 #
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
@@ -9,20 +9,20 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	4.0.0
+Version:	4.0.1
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	456ad12e7c492b275a0d047f2ba89904
+# Source0-md5:	fae149cc9da35c598d8be897826dfc63
 Patch0:		%{name}-glut.patch
-Patch1:		%{name}-sec.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	jbigkit-devel
 BuildRequires:	libjpeg-devel
+%{?with_jpeg12:BuildRequires:	libjpeg12-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
 %{?with_opengl:BuildRequires:	xorg-lib-libX11-devel}
@@ -57,6 +57,7 @@ Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	jbigkit-devel
 Requires:	libjpeg-devel
+%{?with_jpeg12:Requires:	libjpeg12-devel}
 Requires:	xz-devel
 Requires:	zlib-devel
 
@@ -165,7 +166,6 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 %prep
 %setup -q -n tiff-%{version}
 %patch0 -p1
-%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -174,7 +174,8 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_opengl:--without-x}
+	%{!?with_opengl:--without-x} \
+	%{?with_jpeg12:--enable-jpeg12 --with-jpeg12-include-dir=%{_includedir}/libjpeg12 --with-jpeg12-lib=-ljpeg12}
 
 %{__make}
 
