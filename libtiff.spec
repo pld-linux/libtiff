@@ -10,7 +10,7 @@ Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
 Version:	4.0.2
-Release:	2
+Release:	3
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
