@@ -9,19 +9,13 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	4.0.3
-Release:	5
+Version:	4.0.4
+Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	051c1068e6a0627f461948c365290410
+# Source0-md5:	9aee7107408a128c0c7b24286c0db900
 Patch0:		%{name}-glut.patch
-Patch1:	        %{name}-CVE-2012-4447.patch
-Patch2:	        %{name}-CVE-2012-4564.patch
-Patch3:		%{name}-CVE-2013-1960.patch
-Patch4:		%{name}-CVE-2013-1961.patch
-Patch5:		%{name}-CVE-2013-4231.patch
-Patch6:		%{name}-CVE-2013-4232.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
@@ -172,12 +166,6 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 %prep
 %setup -q -n tiff-%{version}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 %{__libtoolize}
