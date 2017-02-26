@@ -16,7 +16,7 @@ Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
 # Source0-md5:	77ae928d2c6b7fb46a21c3a29325157b
 Patch0:		%{name}-glut.patch
-URL:		http://www.remotesensing.org/libtiff/
+URL:		http://www.simplesystems.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
