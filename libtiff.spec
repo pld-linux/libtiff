@@ -9,12 +9,12 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	4.0.6
+Version:	4.0.7
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	d1d2e940dea0b5ad435f21f03d96dd72
+# Source0-md5:	77ae928d2c6b7fb46a21c3a29325157b
 Patch0:		%{name}-glut.patch
 URL:		http://www.remotesensing.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
@@ -29,8 +29,6 @@ BuildRequires:	libtool >= 2:2.2
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_noautoreqdep	libGL.so.1 libGLU.so.1
 
 %description
 This package is a library of functions that manipulate TIFF images.
@@ -187,10 +185,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__rm} -r html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
 
-# program not packaged
-%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/sgi2tiff.1
+# libtiff*.la kept - no .pc file for libtiffxx
 
-# libtiff.la kept - Libs.private are incomplete (lzma missing)
+# tools no longer installed
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/{rgb2ycbcr,thumbnail}.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -235,27 +233,17 @@ rm -rf $RPM_BUILD_ROOT
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/bmp2tiff
 %attr(755,root,root) %{_bindir}/fax2ps
 %attr(755,root,root) %{_bindir}/fax2tiff
-%attr(755,root,root) %{_bindir}/gif2tiff
 %attr(755,root,root) %{_bindir}/pal2rgb
 %attr(755,root,root) %{_bindir}/ppm2tiff
-%attr(755,root,root) %{_bindir}/ras2tiff
 %attr(755,root,root) %{_bindir}/raw2tiff
-%attr(755,root,root) %{_bindir}/rgb2ycbcr
-%attr(755,root,root) %{_bindir}/thumbnail
 %attr(755,root,root) %{_bindir}/tiff[!g]*
-%{_mandir}/man1/bmp2tiff.1*
 %{_mandir}/man1/fax2ps.1*
 %{_mandir}/man1/fax2tiff.1*
-%{_mandir}/man1/gif2tiff.1*
 %{_mandir}/man1/pal2rgb.1*
 %{_mandir}/man1/ppm2tiff.1*
-%{_mandir}/man1/ras2tiff.1*
 %{_mandir}/man1/raw2tiff.1*
-%{_mandir}/man1/rgb2ycbcr.1*
-%{_mandir}/man1/thumbnail.1*
 %{_mandir}/man1/tiff[!g]*.1*
 
 %if %{with opengl}
