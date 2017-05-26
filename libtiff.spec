@@ -9,12 +9,12 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	4.0.7
+Version:	4.0.8
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	77ae928d2c6b7fb46a21c3a29325157b
+# Source0-md5:	2a7d1c1318416ddf36d5f6fa4600069b
 Patch0:		%{name}-glut.patch
 URL:		http://www.simplesystems.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
@@ -186,9 +186,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__rm} -r html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
 
 # libtiff*.la kept - no .pc file for libtiffxx
-
-# tools no longer installed
-%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/{rgb2ycbcr,thumbnail}.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
