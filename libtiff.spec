@@ -25,9 +25,12 @@ BuildRequires:	libjpeg-devel
 %{?with_jpeg12:BuildRequires:	libjpeg12-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
+BuildRequires:	libwebp-devel
 %{?with_opengl:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
+BuildRequires:	zstd-devel >= 1.0.0
+Requires:	zstd >= 1.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -56,8 +59,10 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	jbigkit-devel
 Requires:	libjpeg-devel
 %{?with_jpeg12:Requires:	libjpeg12-devel}
+Requires:	libwebp-devel
 Requires:	xz-devel
 Requires:	zlib-devel
+Requires:	zstd-devel >= 1.0.0
 
 %description devel
 This package is all you need to develop programs that manipulate tiff
