@@ -1,7 +1,8 @@
 #
 # Conditional build:
-%bcond_without	opengl	# do not build OpenGL viewer
-%bcond_with	jpeg12	# dual 8/12-bit libjpeg mode
+%bcond_without	opengl		# OpenGL viewer
+%bcond_without	libdeflate	# libdeflate for faster Deflate support
+%bcond_with	jpeg12		# dual 8/12-bit libjpeg mode
 #
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
@@ -9,23 +10,25 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	4.1.0
+Version:	4.2.0
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	2165e7aba557463acc0664e71a3ed424
+# Source0-md5:	2bbf6db1ddc4a59c89d6986b368fc063
 Patch0:		%{name}-glut.patch
 URL:		http://www.simplesystems.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	jbigkit-devel
+%{?with_libdeflate:BuildRequires:	libdeflate-devel}
 BuildRequires:	libjpeg-devel
 %{?with_jpeg12:BuildRequires:	libjpeg12-devel}
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
+BuildRequires:	rpm-build >= 4.6
 %{?with_opengl:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
@@ -57,6 +60,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	jbigkit-devel
+%{?with_libdeflate:Requires:	libdeflate-devel}
 Requires:	libjpeg-devel
 %{?with_jpeg12:Requires:	libjpeg12-devel}
 Requires:	libwebp-devel
@@ -166,6 +170,18 @@ tiffgt - OpenGL-based tiff viewer.
 %description progs-gl -l pl.UTF-8
 tiffgt - program do oglądania plików tiff oparty o OpenGL.
 
+%package doc
+Summary:	HTML documentation for tiff library and tools
+Summary(pl.UTF-8):	Dokumentacja w formacie HTML do biblioteki i narzędzi tiff
+Group:		Documentation
+BuildArch:	noarch
+
+%description doc
+HTML documentation for tiff library and tools.
+
+%description doc -l pl.UTF-8
+Dokumentacja w formacie HTML do biblioteki i narzędzi tiff.
+
 %prep
 %setup -q -n tiff-%{version}
 %patch0 -p1
@@ -177,8 +193,10 @@ tiffgt - program do oglądania plików tiff oparty o OpenGL.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_opengl:--without-x} \
-	%{?with_jpeg12:--enable-jpeg12 --with-jpeg12-include-dir=%{_includedir}/libjpeg12 --with-jpeg12-lib=-ljpeg12}
+	%{?with_jpeg12:--enable-jpeg12 --with-jpeg12-include-dir=%{_includedir}/libjpeg12 --with-jpeg12-lib=-ljpeg12} \
+	%{!?with_libdeflate:--disable-libdeflate} \
+	--with-docdir=%{_docdir}/tiff \
+	%{!?with_opengl:--without-x}
 
 %{__make}
 
@@ -187,8 +205,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} -r html{,/*}/Makefile* $RPM_BUILD_ROOT%{_docdir}/tiff-%{version}
 
 # libtiff*.la kept - no .pc file for libtiffxx
 
@@ -206,7 +222,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc html/*
 %attr(755,root,root) %{_libdir}/libtiff.so
 %{_libdir}/libtiff.la
 %{_includedir}/tiff*.h
@@ -254,3 +269,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/tiffgt
 %{_mandir}/man1/tiffgt.1*
 %endif
+
+%files doc
+%defattr(644,root,root,755)
+%{_docdir}/tiff
