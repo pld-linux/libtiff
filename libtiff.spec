@@ -10,18 +10,19 @@ Summary(fr.UTF-8):	Bibliothèque de gestion des fichiers TIFF
 Summary(pl.UTF-8):	Biblioteka do manipulacji plikami w formacie TIFF
 Summary(tr.UTF-8):	TIFF dosyalarını işleme kitaplığı
 Name:		libtiff
-Version:	4.2.0
+Version:	4.3.0
 Release:	1
 License:	BSD-like
 Group:		Libraries
 Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.gz
-# Source0-md5:	2bbf6db1ddc4a59c89d6986b368fc063
+# Source0-md5:	0a2e4744d1426a8fc8211c0cdbc3a1b3
 Patch0:		%{name}-glut.patch
 URL:		http://www.simplesystems.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
 BuildRequires:	autoconf >= 2.64
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	jbigkit-devel
+BuildRequires:	lerc-devel
 %{?with_libdeflate:BuildRequires:	libdeflate-devel}
 BuildRequires:	libjpeg-devel
 %{?with_jpeg12:BuildRequires:	libjpeg12-devel}
@@ -60,6 +61,7 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki libtiff
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	jbigkit-devel
+Requires:	lerc-devel
 %{?with_libdeflate:Requires:	libdeflate-devel}
 Requires:	libjpeg-devel
 %{?with_jpeg12:Requires:	libjpeg12-devel}
