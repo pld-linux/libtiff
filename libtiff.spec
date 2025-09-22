@@ -2,6 +2,7 @@
 # Conditional build:
 %bcond_without	opengl		# OpenGL viewer
 %bcond_without	libdeflate	# libdeflate for faster Deflate support
+%bcond_without	static_libs	# static libraries
 %bcond_with	jpeg12		# dual 8/12-bit libjpeg mode
 #
 Summary:	Library for handling TIFF files
@@ -197,6 +198,7 @@ Dokumentacja w formacie HTML do biblioteki i narzędzi tiff.
 %{__autoheader}
 %{__automake}
 %configure \
+	%{!?with_static_libs:--disable-static} \
 	%{?with_jpeg12:--enable-jpeg12 --with-jpeg12-include-dir=%{_includedir}/libjpeg12 --with-jpeg12-lib=-ljpeg12} \
 	%{!?with_libdeflate:--disable-libdeflate} \
 	--with-docdir=%{_docdir}/tiff \
@@ -234,9 +236,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/_TIFF*.3tiff*
 %{_mandir}/man3/libtiff.3tiff*
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libtiff.a
+%endif
 
 %files cxx
 %defattr(644,root,root,755)
@@ -249,9 +253,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/libtiffxx.la
 %{_includedir}/tiffio.hxx
 
+%if %{with static_libs}
 %files cxx-static
 %defattr(644,root,root,755)
 %{_libdir}/libtiffxx.a
+%endif
 
 %files progs
 %defattr(644,root,root,755)
