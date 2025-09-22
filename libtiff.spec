@@ -19,7 +19,7 @@ Source0:	http://download.osgeo.org/libtiff/tiff-%{version}.tar.xz
 Patch0:		%{name}-glut.patch
 URL:		http://www.simplesystems.org/libtiff/
 %{?with_opengl:BuildRequires:  OpenGL-glut-devel}
-BuildRequires:	autoconf >= 2.64
+BuildRequires:	autoconf >= 2.69
 BuildRequires:	automake >= 1:1.11
 BuildRequires:	jbigkit-devel
 BuildRequires:	lerc-devel
