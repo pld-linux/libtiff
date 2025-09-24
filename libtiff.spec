@@ -3,7 +3,6 @@
 %bcond_without	opengl		# OpenGL viewer
 %bcond_without	libdeflate	# libdeflate for faster Deflate support
 %bcond_without	static_libs	# static libraries
-%bcond_with	jpeg12		# dual 8/12-bit libjpeg mode
 #
 Summary:	Library for handling TIFF files
 Summary(de.UTF-8):	Library zum Verwalten von TIFF-Dateien
@@ -25,8 +24,8 @@ BuildRequires:	automake >= 1:1.11
 BuildRequires:	jbigkit-devel
 BuildRequires:	lerc-devel
 %{?with_libdeflate:BuildRequires:	libdeflate-devel}
-BuildRequires:	libjpeg-devel
-%{?with_jpeg12:BuildRequires:	libjpeg12-devel}
+# libjpeg-turbo 3.0+ for 8/12-bit dual mode
+BuildRequires:	libjpeg-turbo-devel >= 3.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	libtool >= 2:2.2
 BuildRequires:	libwebp-devel
@@ -37,6 +36,7 @@ BuildRequires:	xz
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel >= 1.0.0
+Requires:	libjpeg-turbo >= 3.0
 Requires:	zstd >= 1.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -66,8 +66,7 @@ Requires:	%{name} = %{version}-%{release}
 Requires:	jbigkit-devel
 Requires:	lerc-devel
 %{?with_libdeflate:Requires:	libdeflate-devel}
-Requires:	libjpeg-devel
-%{?with_jpeg12:Requires:	libjpeg12-devel}
+Requires:	libjpeg-turbo-devel >= 3.0
 Requires:	libwebp-devel
 Requires:	xz-devel
 Requires:	zlib-devel
@@ -198,9 +197,8 @@ Dokumentacja w formacie HTML do biblioteki i narzędzi tiff.
 %{__autoheader}
 %{__automake}
 %configure \
-	%{!?with_static_libs:--disable-static} \
-	%{?with_jpeg12:--enable-jpeg12 --with-jpeg12-include-dir=%{_includedir}/libjpeg12 --with-jpeg12-lib=-ljpeg12} \
 	%{!?with_libdeflate:--disable-libdeflate} \
+	%{!?with_static_libs:--disable-static} \
 	--with-docdir=%{_docdir}/tiff \
 	%{!?with_opengl:--without-x}
 
@@ -211,6 +209,9 @@ rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+# tools not packaged
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/{rgb2ycbcr,thumbnail}.1*
 
 # libtiff*.la kept - no .pc file for libtiffxx
 
@@ -225,13 +226,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc ChangeLog README.md TODO
+%doc ChangeLog LICENSE.md README.md TODO
 %attr(755,root,root) %{_libdir}/libtiff.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtiff.so.6
+%ghost %{_libdir}/libtiff.so.6
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libtiff.so
+%{_libdir}/libtiff.so
 %{_libdir}/libtiff.la
 %{_includedir}/tiff*.h
 %{_pkgconfigdir}/libtiff-4.pc
@@ -248,11 +249,11 @@ rm -rf $RPM_BUILD_ROOT
 %files cxx
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libtiffxx.so.*.*.*
-%attr(755,root,root) %ghost %{_libdir}/libtiffxx.so.6
+%ghost %{_libdir}/libtiffxx.so.6
 
 %files cxx-devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libtiffxx.so
+%{_libdir}/libtiffxx.so
 %{_libdir}/libtiffxx.la
 %{_includedir}/tiffio.hxx
 
