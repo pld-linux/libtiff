@@ -36,8 +36,8 @@ BuildRequires:	xz
 BuildRequires:	xz-devel
 BuildRequires:	zlib-devel
 BuildRequires:	zstd-devel >= 1.0.0
-Requires:	libjpeg-turbo >= 3.0
-Requires:	zstd >= 1.0.0
+Requires:	libjpeg-turbo%{?_isa} >= 3.0
+Requires:	zstd%{?_isa} >= 1.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -62,15 +62,15 @@ Summary:	Header files for developing programs using libtiff
 Summary(de.UTF-8):	Header zur Entwicklung von Programmen unter Verwendung von libtiff
 Summary(pl.UTF-8):	Pliki nagłówkowe do biblioteki libtiff
 Group:		Development/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	jbigkit-devel
-Requires:	lerc-devel
-%{?with_libdeflate:Requires:	libdeflate-devel}
-Requires:	libjpeg-turbo-devel >= 3.0
-Requires:	libwebp-devel
-Requires:	xz-devel
-Requires:	zlib-devel
-Requires:	zstd-devel >= 1.0.0
+Requires:	%{name}%{?_isa} = %{version}-%{release}
+Requires:	jbigkit-devel%{?_isa}
+Requires:	lerc-devel%{?_isa}
+%{?with_libdeflate:Requires:	libdeflate-devel%{?_isa}}
+Requires:	libjpeg-turbo-devel%{?_isa} >= 3.0
+Requires:	libwebp-devel%{?_isa}
+Requires:	xz-devel%{?_isa}
+Requires:	zlib-devel%{?_isa}
+Requires:	zstd-devel%{?_isa} >= 1.0.0
 
 %description devel
 This package is all you need to develop programs that manipulate tiff
@@ -96,7 +96,7 @@ pakette yer alır.
 Summary:	Static version libtiff library
 Summary(pl.UTF-8):	Biblioteka statyczna libtiff
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
 
 %description static
 Static libtiff library.
@@ -108,7 +108,7 @@ Statyczna biblioteka libtiff.
 Summary:	libtiff C++ streams library
 Summary(pl.UTF-8):	Biblioteka strumieni C++ dla libtiff
 Group:		Libraries
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description cxx
 libtiff C++ streams library.
@@ -120,9 +120,9 @@ Biblioteka strumieni C++ dla libtiff.
 Summary:	libtiff C++ streams API
 Summary(pl.UTF-8):	API strumieni C++ dla libtiff
 Group:		Development/Libraries
-Requires:	%{name}-cxx = %{version}-%{release}
-Requires:	%{name}-devel = %{version}-%{release}
-Requires:	libstdc++-devel
+Requires:	%{name}-cxx%{?_isa} = %{version}-%{release}
+Requires:	%{name}-devel%{?_isa} = %{version}-%{release}
+Requires:	libstdc++-devel%{?_isa}
 
 %description cxx-devel
 libtiff C++ streams API.
@@ -134,7 +134,7 @@ API strumieni C++ dla libtiff.
 Summary:	libtiff C++ streams static library
 Summary(pl.UTF-8):	Statyczna biblioteka strumieni C++ dla libtiff
 Group:		Development/Libraries
-Requires:	%{name}-cxx-devel = %{version}-%{release}
+Requires:	%{name}-cxx-devel%{?_isa} = %{version}-%{release}
 
 %description cxx-static
 libtiff C++ streams static library.
@@ -148,7 +148,7 @@ Summary(de.UTF-8):	Einfachen Clients zur Manipulation von tiff
 Summary(fr.UTF-8):	Clients simples pour manipuler de telles images
 Summary(pl.UTF-8):	Kilka prostych programów do manipulowania na plikach tiff
 Group:		Applications/Graphics
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description progs
 Simple clients for manipulating tiff images.
@@ -166,7 +166,7 @@ Kilka prostych programów do manipulowania na plikach tiff.
 Summary:	tiffgt - OpenGL-based tiff viewer
 Summary(pl.UTF-8):	tiffgt - program do oglądania plików tiff oparty o OpenGL
 Group:		Applications/Graphics
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %description progs-gl
 tiffgt - OpenGL-based tiff viewer.
